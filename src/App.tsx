@@ -46,12 +46,8 @@ function App() {
 				<section className='snap-start h-screen flex items-center justify-center overflow-y-auto'>
 					<div className='w-full'>
 						<Contact />
+						<Footer />
 					</div>
-				</section>
-
-				{/* Footer Section */}
-				<section className='snap-start h-screen flex items-end'>
-					<Footer />
 				</section>
 			</main>
 
