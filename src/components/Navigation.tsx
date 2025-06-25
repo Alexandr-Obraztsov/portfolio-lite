@@ -69,7 +69,7 @@ export default function Navigation() {
 							className='text-xl font-mono font-semibold nav-logo cursor-pointer'
 							onClick={() => scrollToSection(0)}
 						>
-							{'<Dev />'}
+							{'<Obratsov />'}
 						</motion.div>
 
 						{/* Desktop Navigation */}

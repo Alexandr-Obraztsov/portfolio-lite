@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
@@ -21,6 +21,13 @@ function LoadingSpinner() {
 function App() {
 	const [activeSection, setActiveSection] = useState(0)
 	const mainRef = useRef<HTMLElement>(null)
+
+	const scrollAnimate = (index: number) => {
+		return {
+			opacity: activeSection === index ? 1 : 0.5,
+			filter: activeSection === index ? 'blur(0px)' : 'blur(2px)',
+		}
+	}
 
 	// Отслеживание активной секции
 	useEffect(() => {
@@ -57,10 +64,7 @@ function App() {
 				{/* Hero Section */}
 				<motion.section
 					className='snap-start h-screen flex items-center justify-center relative'
-					animate={{
-						opacity: activeSection === 0 ? 1 : 0.2,
-						filter: activeSection === 0 ? 'blur(0px)' : 'blur(2px)',
-					}}
+					animate={scrollAnimate(0)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
 					<Hero isActive={activeSection === 0} />
@@ -69,10 +73,7 @@ function App() {
 				{/* Projects Section */}
 				<motion.section
 					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
-					animate={{
-						opacity: activeSection === 1 ? 1 : 0.2,
-						filter: activeSection === 1 ? 'blur(0px)' : 'blur(2px)',
-					}}
+					animate={scrollAnimate(1)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
 					<Projects />
@@ -81,10 +82,7 @@ function App() {
 				{/* Skills Section */}
 				<motion.section
 					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
-					animate={{
-						opacity: activeSection === 2 ? 1 : 0.2,
-						filter: activeSection === 2 ? 'blur(0px)' : 'blur(2px)',
-					}}
+					animate={scrollAnimate(2)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
 					<div className='w-full'>
@@ -95,10 +93,7 @@ function App() {
 				{/* Contact Section */}
 				<motion.section
 					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
-					animate={{
-						opacity: activeSection === 3 ? 1 : 0.2,
-						filter: activeSection === 3 ? 'blur(0px)' : 'blur(2px)',
-					}}
+					animate={scrollAnimate(3)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
 					<div className='w-full'>
@@ -107,11 +102,6 @@ function App() {
 					</div>
 				</motion.section>
 			</main>
-
-			{/* Loading Overlay */}
-			<Suspense fallback={<LoadingSpinner />}>
-				<div></div>
-			</Suspense>
 		</div>
 	)
 }
