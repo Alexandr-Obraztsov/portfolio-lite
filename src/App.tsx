@@ -1,4 +1,5 @@
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
@@ -18,37 +19,93 @@ function LoadingSpinner() {
 }
 
 function App() {
+	const [activeSection, setActiveSection] = useState(0)
+	const mainRef = useRef<HTMLElement>(null)
+
+	// Отслеживание активной секции
+	useEffect(() => {
+		const handleScroll = () => {
+			if (!mainRef.current) return
+
+			const scrollTop = mainRef.current.scrollTop
+			const windowHeight = window.innerHeight
+			const currentSection = Math.round(scrollTop / windowHeight)
+
+			if (currentSection !== activeSection) {
+				setActiveSection(currentSection)
+			}
+		}
+
+		const mainElement = mainRef.current
+		if (mainElement) {
+			mainElement.addEventListener('scroll', handleScroll, { passive: true })
+			return () => mainElement.removeEventListener('scroll', handleScroll)
+		}
+	}, [activeSection])
+
 	return (
-		<div className='min-h-screen bg-dark text-text-primary overflow-x-hidden snap-y snap-mandatory'>
+		<div className='min-h-screen bg-dark text-text-primary overflow-x-hidden'>
 			{/* Navigation */}
 			<Navigation />
 
 			{/* Main Content with Snap Scrolling */}
-			<main className='snap-y snap-mandatory overflow-y-auto h-screen relative z-10'>
+			<main
+				ref={mainRef}
+				className='snap-y snap-mandatory overflow-y-auto h-screen relative z-10'
+				style={{ scrollBehavior: 'smooth' }}
+			>
 				{/* Hero Section */}
-				<section className='snap-start h-screen flex items-center justify-center'>
-					<Hero />
-				</section>
+				<motion.section
+					className='snap-start h-screen flex items-center justify-center relative'
+					animate={{
+						opacity: activeSection === 0 ? 1 : 0.2,
+						filter: activeSection === 0 ? 'blur(0px)' : 'blur(2px)',
+					}}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
+				>
+					<Hero isActive={activeSection === 0} />
+				</motion.section>
 
 				{/* Projects Section */}
-				<section className='snap-start h-screen flex items-center justify-center overflow-y-auto'>
+				<motion.section
+					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
+					animate={{
+						opacity: activeSection === 1 ? 1 : 0.2,
+						filter: activeSection === 1 ? 'blur(0px)' : 'blur(2px)',
+					}}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
+				>
 					<Projects />
-				</section>
+				</motion.section>
 
 				{/* Skills Section */}
-				<section className='snap-start h-screen flex items-center justify-center overflow-y-auto'>
+				<motion.section
+					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
+					animate={{
+						opacity: activeSection === 2 ? 1 : 0.2,
+						filter: activeSection === 2 ? 'blur(0px)' : 'blur(2px)',
+					}}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
+				>
 					<div className='w-full'>
 						<Skills />
 					</div>
-				</section>
+				</motion.section>
 
 				{/* Contact Section */}
-				<section className='snap-start h-screen flex items-center justify-center overflow-y-auto'>
+				<motion.section
+					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
+					animate={{
+						opacity: activeSection === 3 ? 1 : 0.2,
+						filter: activeSection === 3 ? 'blur(0px)' : 'blur(2px)',
+					}}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
+				>
 					<div className='w-full'>
 						<Contact />
 						<Footer />
 					</div>
-				</section>
+				</motion.section>
 			</main>
 
 			{/* Loading Overlay */}

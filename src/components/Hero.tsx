@@ -10,7 +10,11 @@ const roles = [
 	'JavaScript Expert',
 ]
 
-export default function Hero() {
+interface HeroProps {
+	isActive?: boolean
+}
+
+export default function Hero({ isActive = true }: HeroProps) {
 	const [currentRole, setCurrentRole] = useState(0)
 
 	useEffect(() => {
@@ -42,10 +46,12 @@ export default function Hero() {
 
 	return (
 		<div className='w-full h-full flex items-center justify-center relative overflow-hidden'>
-			{/* Интерактивная сетка */}
-			<div className='absolute inset-0 z-0'>
-				<InteractiveGrid />
-			</div>
+			{/* Интерактивная сетка - только когда Hero активна */}
+			{isActive && (
+				<div className='absolute inset-0 z-0'>
+					<InteractiveGrid />
+				</div>
+			)}
 
 			<div className='max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10'>
 				<motion.div
