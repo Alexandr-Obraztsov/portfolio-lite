@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, Code, Sparkles } from 'lucide-react'
+import InteractiveGrid from './InteractiveGrid'
 
 const roles = [
 	'Frontend Developer',
@@ -16,6 +17,7 @@ export default function Hero() {
 		const interval = setInterval(() => {
 			setCurrentRole(prev => (prev + 1) % roles.length)
 		}, 3000)
+
 		return () => clearInterval(interval)
 	}, [])
 
@@ -25,24 +27,26 @@ export default function Hero() {
 			opacity: 1,
 			transition: {
 				staggerChildren: 0.3,
-				delayChildren: 0.2,
 			},
 		},
 	}
 
 	const itemVariants = {
-		hidden: { y: 30, opacity: 0 },
+		hidden: { opacity: 0, y: 30 },
 		visible: {
-			y: 0,
 			opacity: 1,
-			transition: {
-				duration: 0.8,
-			},
+			y: 0,
+			transition: { duration: 0.6 },
 		},
 	}
 
 	return (
 		<div className='w-full h-full flex items-center justify-center relative overflow-hidden'>
+			{/* Интерактивная сетка */}
+			<div className='absolute inset-0 z-0'>
+				<InteractiveGrid />
+			</div>
+
 			<div className='max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10'>
 				<motion.div
 					variants={containerVariants}
@@ -208,24 +212,6 @@ export default function Hero() {
 					<ChevronDown size={20} />
 				</motion.div>
 			</motion.div>
-
-			{/* Decorative Elements */}
-			<div
-				className='absolute top-1/4 left-10 w-2 h-2 rounded-full animate-pulse opacity-60'
-				style={{ backgroundColor: 'var(--color-accent)' }}
-			></div>
-			<div
-				className='absolute top-1/3 right-20 w-1 h-1 rounded-full animate-pulse opacity-40'
-				style={{ backgroundColor: 'var(--color-accent)' }}
-			></div>
-			<div
-				className='absolute bottom-1/4 left-1/4 w-1.5 h-1.5 rounded-full animate-pulse opacity-50'
-				style={{ backgroundColor: 'var(--color-accent)' }}
-			></div>
-			<div
-				className='absolute bottom-1/3 right-1/4 w-1 h-1 rounded-full animate-pulse opacity-30'
-				style={{ backgroundColor: 'var(--color-accent)' }}
-			></div>
 		</div>
 	)
 }

@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import ThreeBackground from './components/ThreeBackground'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
@@ -21,16 +20,11 @@ function LoadingSpinner() {
 function App() {
 	return (
 		<div className='min-h-screen bg-dark text-text-primary overflow-x-hidden snap-y snap-mandatory'>
-			{/* 3D Background */}
-			<Suspense fallback={null}>
-				<ThreeBackground />
-			</Suspense>
-
 			{/* Navigation */}
 			<Navigation />
 
 			{/* Main Content with Snap Scrolling */}
-			<main className='snap-y snap-mandatory overflow-y-auto h-screen'>
+			<main className='snap-y snap-mandatory overflow-y-auto h-screen relative z-10'>
 				{/* Hero Section */}
 				<section className='snap-start h-screen flex items-center justify-center'>
 					<Hero />

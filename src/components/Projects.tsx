@@ -5,8 +5,6 @@ const projects = [
 	{
 		id: 1,
 		title: 'E-Commerce Dashboard',
-		description:
-			'Современный дашборд для управления интернет-магазином с аналитикой в реальном времени, управлением товарами и обработкой заказов.',
 		image:
 			'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center',
 		tech: ['React', 'TypeScript', 'Tailwind CSS', 'Chart.js'],
@@ -17,8 +15,6 @@ const projects = [
 	{
 		id: 2,
 		title: 'Task Management App',
-		description:
-			'Приложение для управления задачами с Kanban-доской, функцией перетаскивания и совместной работой в команде.',
 		image:
 			'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&crop=center',
 		tech: ['Next.js', 'Redux', 'Prisma', 'PostgreSQL'],
@@ -29,8 +25,6 @@ const projects = [
 	{
 		id: 3,
 		title: 'Weather Dashboard',
-		description:
-			'Интерактивная погодная панель с прогнозами, картами и красивыми анимациями.',
 		image:
 			'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop&crop=center',
 		tech: ['Vue.js', 'D3.js', 'OpenWeather API'],
@@ -41,8 +35,6 @@ const projects = [
 	{
 		id: 4,
 		title: 'Portfolio Website',
-		description:
-			'Минималистичное портфолио с 3D-анимациями и современным дизайном.',
 		image:
 			'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop&crop=center',
 		tech: ['React', 'Three.js', 'Framer Motion'],
@@ -90,11 +82,6 @@ function ProjectCard({
 								⭐ Избранное
 							</motion.span>
 						)}
-
-						{/* Description */}
-						<motion.p className='text-gray-200 mb-6 leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 max-w-sm'>
-							{project.description}
-						</motion.p>
 
 						{/* Technologies */}
 						<motion.div className='flex flex-wrap gap-2 justify-center mb-6 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-250'>
@@ -179,26 +166,6 @@ export default function Projects() {
 						<ProjectCard key={project.id} project={project} index={index} />
 					))}
 				</div>
-
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6, delay: 0.4 }}
-					viewport={{ once: true }}
-					className='text-center pb-4'
-				>
-					<motion.a
-						href='https://github.com'
-						target='_blank'
-						rel='noopener noreferrer'
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						className='inline-flex items-center gap-2 px-6 py-3 border-2 border-accent text-accent hover:bg-accent hover:text-dark transition-all duration-300 rounded-lg font-semibold'
-					>
-						<Github size={20} />
-						Посмотреть все проекты на GitHub
-					</motion.a>
-				</motion.div>
 			</div>
 		</div>
 	)
