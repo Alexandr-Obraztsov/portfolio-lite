@@ -1,8 +1,4 @@
-import { motion } from 'framer-motion'
-import { Eye } from 'lucide-react'
-import ProjectCarousel from './ProjectCarousel'
-import { ProjectCard } from './ProjectCard'
-import ScrollIndicator from '../ScrollIndicator/ScrollIndicator'
+import { Eye, Github, ExternalLink, Star, ArrowDown } from 'lucide-react'
 
 export interface Project {
 	id: number
@@ -14,9 +10,20 @@ export interface Project {
 	demo: string
 	featured: boolean
 	category: string
-	icon: React.ReactNode
-	gradient: string
-	stats: { users: string; rating: number; downloads: string }
+}
+
+const scrollToNext = () => {
+	const mainElement = document.querySelector('main')
+	if (mainElement) {
+		const sections = mainElement.querySelectorAll('section')
+		const nextSection = sections[3] // Skills section
+		if (nextSection) {
+			mainElement.scrollTo({
+				top: nextSection.offsetTop,
+				behavior: 'smooth',
+			})
+		}
+	}
 }
 
 export default function Projects() {
@@ -25,154 +32,184 @@ export default function Projects() {
 			id: 1,
 			title: 'CryptoTracker Pro',
 			description:
-				'Профессиональный трекер криптовалют с real-time данными, интерактивными графиками и портфолио-менеджером',
+				'Профессиональный трекер криптовалют с real-time данными и интерактивными графиками',
 			image:
 				'https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=800&h=600&fit=crop&crop=center',
-			tech: ['React', 'TypeScript', 'D3.js', 'WebSocket', 'TradingView'],
+			tech: ['React', 'TypeScript', 'D3.js', 'WebSocket'],
 			github: 'https://github.com',
 			demo: 'https://demo.com',
 			featured: true,
 			category: 'Web App',
-			icon: <Eye className='w-6 h-6' />,
-			gradient: 'from-yellow-400 via-orange-500 to-red-500',
-			stats: { users: '15K+', rating: 4.9, downloads: '50K+' },
 		},
 		{
 			id: 2,
 			title: 'TaskMaster AI',
 			description:
-				'Умный планировщик задач с ИИ-помощником, автоматическим планированием и командной работой',
+				'Умный планировщик задач с ИИ-помощником и командной работой',
 			image:
 				'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop&crop=center',
-			tech: ['Next.js', 'OpenAI', 'Prisma', 'PostgreSQL', 'Redis'],
+			tech: ['Next.js', 'OpenAI', 'Prisma', 'PostgreSQL'],
 			github: 'https://github.com',
 			demo: 'https://demo.com',
 			featured: true,
 			category: 'SaaS',
-			icon: <Eye className='w-6 h-6' />,
-			gradient: 'from-blue-400 via-purple-500 to-pink-500',
-			stats: { users: '8K+', rating: 4.8, downloads: '25K+' },
 		},
 		{
 			id: 3,
 			title: 'DesignSystem Studio',
-			description:
-				'Конструктор дизайн-систем с live preview, генерацией кода и экспортом в Figma',
+			description: 'Конструктор дизайн-систем с live preview и генерацией кода',
 			image:
 				'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop&crop=center',
-			tech: ['Vue.js', 'Nuxt', 'Canvas API', 'Figma API', 'Storybook'],
+			tech: ['Vue.js', 'Nuxt', 'Canvas API', 'Figma API'],
 			github: 'https://github.com',
 			demo: 'https://demo.com',
 			featured: false,
 			category: 'Design Tool',
-			icon: <Eye className='w-6 h-6' />,
-			gradient: 'from-green-400 via-cyan-500 to-blue-500',
-			stats: { users: '12K+', rating: 4.7, downloads: '35K+' },
 		},
 		{
 			id: 4,
-			title: 'DataViz Dashboard',
-			description:
-				'Интерактивная платформа для визуализации больших данных с машинным обучением',
-			image:
-				'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=center',
-			tech: ['React', 'Python', 'FastAPI', 'TensorFlow', 'Apache Kafka'],
-			github: 'https://github.com',
-			demo: 'https://demo.com',
-			featured: false,
-			category: 'Analytics',
-			icon: <Eye className='w-6 h-6' />,
-			gradient: 'from-purple-400 via-pink-500 to-red-500',
-			stats: { users: '6K+', rating: 4.6, downloads: '18K+' },
-		},
-		{
-			id: 5,
 			title: 'E-Commerce Engine',
-			description:
-				'Полнофункциональная платформа электронной коммерции с микросервисной архитектурой',
+			description: 'Полнофункциональная платформа электронной коммерции',
 			image:
 				'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center',
-			tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Docker'],
+			tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
 			github: 'https://github.com',
 			demo: 'https://demo.com',
 			featured: true,
 			category: 'E-Commerce',
-			icon: <Eye className='w-6 h-6' />,
-			gradient: 'from-indigo-400 via-purple-500 to-pink-500',
-			stats: { users: '20K+', rating: 4.9, downloads: '75K+' },
-		},
-		{
-			id: 6,
-			title: 'MobileFirst PWA',
-			description:
-				'Прогрессивное веб-приложение с offline-режимом и push-уведомлениями',
-			image:
-				'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center',
-			tech: ['Svelte', 'Service Workers', 'IndexedDB', 'WebRTC'],
-			github: 'https://github.com',
-			demo: 'https://demo.com',
-			featured: false,
-			category: 'PWA',
-			icon: <Eye className='w-6 h-6' />,
-			gradient: 'from-teal-400 via-green-500 to-lime-500',
-			stats: { users: '10K+', rating: 4.5, downloads: '30K+' },
 		},
 	]
 
 	return (
-		<>
-			<div className='max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col justify-center min-h-screen relative'>
+		<div className='w-full min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col justify-center relative'>
+			<div className='max-w-7xl mx-auto'>
 				{/* Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-					viewport={{ once: true }}
-					className='text-center mb-4 sm:mb-6 md:mb-16'
-				>
-					<div className='flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-6'>
-						<div className='p-1.5 sm:p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl'>
-							<Eye className='text-white w-4 h-4 sm:w-6 sm:h-6' />
-						</div>
-						<span className='font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider font-semibold'>
+				<div className='text-center mb-16 opacity-0 animate-[fadeInUp_0.6s_ease-out_0.2s_forwards]'>
+					<div className='flex items-center justify-center gap-2 mb-4'>
+						<Eye className='text-accent' size={24} />
+						<span className='font-mono text-accent text-sm uppercase tracking-wider'>
 							Портфолио проектов
 						</span>
 					</div>
-					<h2 className='text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent mb-3 sm:mb-6'>
+					<h2 className='text-4xl md:text-5xl font-bold text-white mb-6'>
 						Избранные работы
 					</h2>
-					<p className='text-sm sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed px-4'>
-						<span className='md:hidden'>Свайпайте для просмотра проектов</span>
-						<span className='hidden md:inline'>
-							Наведите курсор на проект, чтобы узнать подробности
-						</span>
+					<p className='text-lg text-gray-400 max-w-2xl mx-auto'>
+						Наведите курсор на проект, чтобы узнать подробности
 					</p>
-				</motion.div>
-
-				{/* Mobile Carousels */}
-				<div className='md:hidden mb-6 h-0 grow'>
-					<ProjectCarousel projects={projects} />
 				</div>
 
-				{/* Desktop Grid */}
-				<div className='hidden md:block mb-6'>
-					<motion.div
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}
-						transition={{ duration: 0.6, delay: 0.2 }}
-						viewport={{ once: true }}
-					>
-						<div className='grid grid-cols-2 lg:grid-cols-3 gap-8'>
-							{projects.map((project, index) => (
-								<ProjectCard key={project.id} project={project} index={index} />
-							))}
+				{/* Projects Grid */}
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-16'>
+					{projects.map((project, index) => (
+						<div
+							key={project.id}
+							className='group relative overflow-hidden rounded-2xl cursor-pointer bg-white/5 border border-white/10 hover:border-accent/30 transition-all duration-500 opacity-0 animate-[fadeInUp_0.8s_ease-out_forwards]'
+							style={{
+								animationDelay: `${0.4 + index * 0.2}s`,
+							}}
+						>
+							{/* Project Image */}
+							<div className='relative aspect-[4/3] overflow-hidden'>
+								<img
+									src={project.image}
+									alt={project.title}
+									className='w-full h-full object-cover transition-all duration-700 group-hover:scale-110'
+									loading='lazy'
+								/>
+
+								{/* Featured Badge */}
+								{project.featured && (
+									<div className='absolute top-4 right-4 bg-accent/90 backdrop-blur-sm rounded-full p-2'>
+										<Star className='w-4 h-4 text-slate-900 fill-slate-900' />
+									</div>
+								)}
+
+								{/* Overlay */}
+								<div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500' />
+
+								{/* Action Buttons */}
+								<div className='absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500'>
+									<a
+										href={project.github}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all duration-300 hover:scale-110'
+									>
+										<Github size={20} />
+									</a>
+									<a
+										href={project.demo}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='p-3 bg-accent/80 backdrop-blur-sm rounded-full text-slate-900 hover:bg-accent transition-all duration-300 hover:scale-110'
+									>
+										<ExternalLink size={20} />
+									</a>
+								</div>
+							</div>
+
+							{/* Project Info */}
+							<div className='p-6'>
+								<div className='flex items-start justify-between mb-3'>
+									<h3 className='text-xl font-bold text-white group-hover:text-accent transition-colors'>
+										{project.title}
+									</h3>
+									<span className='px-2 py-1 bg-accent/20 text-accent text-xs font-medium rounded-full'>
+										{project.category}
+									</span>
+								</div>
+
+								<p className='text-gray-400 text-sm mb-4 leading-relaxed'>
+									{project.description}
+								</p>
+
+								{/* Tech Stack */}
+								<div className='flex flex-wrap gap-2'>
+									{project.tech.map(tech => (
+										<span
+											key={tech}
+											className='px-3 py-1 bg-white/10 text-gray-300 text-xs rounded-full border border-white/20'
+										>
+											{tech}
+										</span>
+									))}
+								</div>
+							</div>
 						</div>
-					</motion.div>
+					))}
+				</div>
+
+				{/* CTA */}
+				<div className='text-center opacity-0 animate-[fadeInUp_0.8s_ease-out_1.2s_forwards]'>
+					<p className='text-gray-400 mb-6'>
+						Хотите увидеть больше моих работ?
+					</p>
+					<a
+						href='https://github.com'
+						target='_blank'
+						rel='noopener noreferrer'
+						className='inline-flex items-center gap-2 px-8 py-3 bg-accent text-slate-900 rounded-lg font-semibold transition-all duration-300 hover:bg-accent/90 hover:scale-105'
+					>
+						<Github size={20} />
+						Смотреть на GitHub
+					</a>
 				</div>
 			</div>
 
 			{/* Scroll Indicator */}
-			<ScrollIndicator nextSection='Навыки' />
-		</>
+			<div
+				className='absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards]'
+				onClick={scrollToNext}
+			>
+				<div className='flex flex-col items-center text-gray-400 hover:text-accent transition-colors group'>
+					<span className='text-xs font-mono mb-2'>Навыки</span>
+					<ArrowDown
+						size={20}
+						className='animate-bounce group-hover:translate-y-1 transition-transform'
+					/>
+				</div>
+			</div>
+		</div>
 	)
 }

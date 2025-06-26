@@ -1,209 +1,61 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Code, Sparkles } from 'lucide-react'
-import ScrollIndicator from '../ScrollIndicator/ScrollIndicator'
-import InteractiveGrid from './InteractiveGrid'
+import { div } from 'framer-motion/client'
+import { useState, useEffect } from 'react'
 
-const roles = [
-	'Frontend Developer',
-	'React Specialist',
-	'UI/UX Enthusiast',
-	'JavaScript Expert',
-]
+export default function Hero() {
+	const [currentSkill, setCurrentSkill] = useState(0)
 
-interface HeroProps {
-	isActive?: boolean
-}
-
-export default function Hero({ isActive = true }: HeroProps) {
-	const [currentRole, setCurrentRole] = useState(0)
+	const skills = [
+		'FRONTEND DEVELOPER',
+		'CREATIVE PROBLEM SOLVER',
+		'UI/UX DESIGNER',
+		'REACT SPECIALIST',
+		'STRATEGIC THINKER',
+		'FULL STACK ENGINEER',
+	]
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setCurrentRole(prev => (prev + 1) % roles.length)
-		}, 3000)
+			setCurrentSkill(prev => (prev + 1) % skills.length)
+		}, 2500)
 
 		return () => clearInterval(interval)
-	}, [])
-
-	const containerVariants = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.3,
-			},
-		},
-	}
-
-	const itemVariants = {
-		hidden: { opacity: 0, y: 30 },
-		visible: {
-			opacity: 1,
-			y: 0,
-			transition: { duration: 0.6 },
-		},
-	}
+	}, [skills.length])
 
 	return (
-		<div className='w-full h-full flex flex-col items-center justify-center relative overflow-hidden'>
-			{/* Интерактивная сетка - только когда Hero активна */}
-			{isActive && (
-				<div className='absolute inset-0 z-0'>
-					<InteractiveGrid />
+		<div className='min-h-screen flex items-center justify-center bg-white'>
+			<div className='text-center'>
+				{/* Основное имя */}
+				<div className='relative'>
+					<div className='flex items-center justify-center mb-8'>
+						<h1 className='text-[12vw] md:text-[8rem] font-black leading-none tracking-tight text-black'>
+							YOUR
+						</h1>
+					</div>
+
+					<div className='flex items-center justify-center mb-16'>
+						<h1 className='text-[12vw] md:text-[8rem] font-black leading-none tracking-tight text-black'>
+							NAME
+						</h1>
+					</div>
 				</div>
-			)}
 
-			<div className='max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10'>
-				<motion.div
-					variants={containerVariants}
-					initial='hidden'
-					animate='visible'
-					className='space-y-2 sm:space-y-8'
-				>
-					{/* Greeting */}
-					<motion.div variants={itemVariants} className='space-y-2'>
-						<div
-							className='flex items-center justify-center space-x-2  mb-2 sm:mb-4'
-							style={{ color: 'var(--color-accent)' }}
-						>
-							<Sparkles size={20} className='animate-pulse' />
-							<span className='font-mono text-sm'>Привет, меня зовут</span>
-							<Sparkles size={20} className='animate-pulse' />
-						</div>
-					</motion.div>
-
-					{/* Name */}
-					<motion.h1
-						variants={itemVariants}
-						className='text-4xl sm:text-5xl md:text-7xl font-bold mb-4'
-						style={{ color: 'var(--color-text-primary)' }}
+				{/* Анимированный текст навыков */}
+				<div className='h-16 flex items-center justify-center overflow-hidden'>
+					<div
+						className='rotating-text text-lg md:text-xl font-light uppercase tracking-widest text-gray-600'
+						key={currentSkill}
 					>
-						<span className='bg-gradient-to-r from-white via-[var(--color-accent)] to-white bg-clip-text text-transparent'>
-							Образцов Александр
-						</span>
-					</motion.h1>
+						{skills[currentSkill]}
+					</div>
+				</div>
 
-					{/* Animated Role */}
-					<motion.div
-						variants={itemVariants}
-						className='h-12 sm:h-16 flex items-center justify-center'
-					>
-						<div
-							className='text-xl sm:text-2xl md:text-3xl font-semibold relative'
-							style={{ color: 'var(--color-text-secondary)' }}
-						>
-							<Code
-								className='inline-block mr-2'
-								style={{ color: 'var(--color-accent)' }}
-								size={28}
-							/>
-							<motion.span
-								key={currentRole}
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -20 }}
-								transition={{ duration: 0.5 }}
-								className='inline-block'
-							>
-								{roles[currentRole]}
-							</motion.span>
-						</div>
-					</motion.div>
-
-					{/* Description */}
-					<motion.p
-						variants={itemVariants}
-						className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed'
-						style={{ color: 'var(--color-text-secondary)' }}
-					>
-						Создаю современные веб-приложения с фокусом на{' '}
-						<span
-							className='font-semibold'
-							style={{ color: 'var(--color-accent)' }}
-						>
-							пользовательский опыт
-						</span>{' '}
-						и{' '}
-						<span
-							className='font-semibold'
-							style={{ color: 'var(--color-accent)' }}
-						>
-							производительность
-						</span>
-						. Специализируюсь на React, TypeScript и современных фронтенд
-						технологиях.
-					</motion.p>
-
-					{/* CTA Buttons */}
-					<motion.div
-						variants={itemVariants}
-						className='flex flex-col sm:flex-row gap-4 justify-center items-center pt-8'
-					>
-						<motion.button
-							onClick={() => {
-								const mainElement = document.querySelector('main')
-								if (mainElement) {
-									const sections = mainElement.querySelectorAll('section')
-									const targetSection = sections[2] // Projects section (index 2)
-
-									if (targetSection) {
-										mainElement.scrollTo({
-											top: targetSection.offsetTop,
-											behavior: 'smooth',
-										})
-									}
-								}
-							}}
-							className='px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg'
-							style={{
-								backgroundColor: 'var(--color-accent)',
-								color: 'var(--color-dark)',
-								boxShadow: '0 0 0 0 rgba(0, 255, 136, 0.25)',
-							}}
-							whileHover={{
-								scale: 1.05,
-								boxShadow: '0 10px 25px rgba(0, 255, 136, 0.25)',
-							}}
-							whileTap={{ scale: 0.95 }}
-						>
-							Посмотреть работы
-						</motion.button>
-						<motion.button
-							onClick={() => {
-								const mainElement = document.querySelector('main')
-								if (mainElement) {
-									const sections = mainElement.querySelectorAll('section')
-									const targetSection = sections[4] // Contact section (index 4)
-
-									if (targetSection) {
-										mainElement.scrollTo({
-											top: targetSection.offsetTop,
-											behavior: 'smooth',
-										})
-									}
-								}
-							}}
-							className='px-8 py-4 border-2 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105'
-							style={{
-								borderColor: 'var(--color-accent)',
-								color: 'var(--color-accent)',
-							}}
-							whileHover={{
-								scale: 1.05,
-								backgroundColor: 'var(--color-accent)',
-								color: 'var(--color-dark)',
-							}}
-							whileTap={{ scale: 0.95 }}
-						>
-							Связаться со мной
-						</motion.button>
-					</motion.div>
-				</motion.div>
+				{/* Разделяющие точки */}
+				<div className='flex justify-center space-x-2 mt-8'>
+					<div className='w-1 h-1 bg-black rounded-full'></div>
+					<div className='w-1 h-1 bg-black rounded-full'></div>
+					<div className='w-1 h-1 bg-black rounded-full'></div>
+				</div>
 			</div>
-
-			{/* Scroll Indicator */}
-			<ScrollIndicator nextSection='Обо мне' delay={1.5} />
 		</div>
 	)
 }
