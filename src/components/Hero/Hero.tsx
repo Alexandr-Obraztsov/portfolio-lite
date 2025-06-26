@@ -144,10 +144,15 @@ export default function Hero({ isActive = true }: HeroProps) {
 							onClick={() => {
 								const mainElement = document.querySelector('main')
 								if (mainElement) {
-									mainElement.scrollTo({
-										top: window.innerHeight,
-										behavior: 'smooth',
-									})
+									const sections = mainElement.querySelectorAll('section')
+									const targetSection = sections[2] // Projects section (index 2)
+
+									if (targetSection) {
+										mainElement.scrollTo({
+											top: targetSection.offsetTop,
+											behavior: 'smooth',
+										})
+									}
 								}
 							}}
 							className='px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg'
@@ -168,10 +173,15 @@ export default function Hero({ isActive = true }: HeroProps) {
 							onClick={() => {
 								const mainElement = document.querySelector('main')
 								if (mainElement) {
-									mainElement.scrollTo({
-										top: window.innerHeight * 3,
-										behavior: 'smooth',
-									})
+									const sections = mainElement.querySelectorAll('section')
+									const targetSection = sections[4] // Contact section (index 4)
+
+									if (targetSection) {
+										mainElement.scrollTo({
+											top: targetSection.offsetTop,
+											behavior: 'smooth',
+										})
+									}
 								}
 							}}
 							className='px-8 py-4 border-2 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105'

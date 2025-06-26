@@ -150,12 +150,12 @@ export default function Projects() {
 				</motion.div>
 
 				{/* Mobile Carousels */}
-				<div className='sm:hidden mb-6 h-0 grow'>
+				<div className='md:hidden mb-6 h-0 grow'>
 					<ProjectCarousel projects={projects} />
 				</div>
 
 				{/* Desktop Grid */}
-				<div className='hidden sm:block mb-6'>
+				<div className='hidden md:block mb-6'>
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}

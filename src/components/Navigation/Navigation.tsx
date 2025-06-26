@@ -27,8 +27,19 @@ export default function Navigation() {
 
 		const handleScroll = () => {
 			const scrollTop = mainElement.scrollTop
-			const windowHeight = window.innerHeight
-			const currentSection = Math.round(scrollTop / windowHeight)
+			const sections = mainElement.querySelectorAll('section')
+
+			let currentSection = 0
+			sections.forEach((section, index) => {
+				const sectionTop = section.offsetTop
+				const sectionHeight = section.offsetHeight
+
+				// Секция считается активной, если видна больше чем на 30%
+				if (scrollTop >= sectionTop - sectionHeight * 0.3) {
+					currentSection = index
+				}
+			})
+
 			setActiveSection(currentSection)
 			setScrolled(scrollTop > 50)
 		}
@@ -40,11 +51,15 @@ export default function Navigation() {
 	const scrollToSection = (sectionIndex: number) => {
 		const mainElement = document.querySelector('main')
 		if (mainElement) {
-			const windowHeight = window.innerHeight
-			mainElement.scrollTo({
-				top: sectionIndex * windowHeight,
-				behavior: 'smooth',
-			})
+			const sections = mainElement.querySelectorAll('section')
+			const targetSection = sections[sectionIndex]
+
+			if (targetSection) {
+				mainElement.scrollTo({
+					top: targetSection.offsetTop,
+					behavior: 'smooth',
+				})
+			}
 		}
 		setIsOpen(false)
 	}

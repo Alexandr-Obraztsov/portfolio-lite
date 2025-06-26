@@ -25,15 +25,33 @@ const ScrollIndicator = ({
 				})
 			} else {
 				// Переход к следующей секции
+				const sections = mainElement.querySelectorAll('section')
 				const currentScrollTop = mainElement.scrollTop
-				const windowHeight = window.innerHeight
-				const nextSectionTop =
-					Math.ceil(currentScrollTop / windowHeight) * windowHeight
 
-				mainElement.scrollTo({
-					top: nextSectionTop,
-					behavior: 'smooth',
+				// Найдем текущую секцию
+				let currentSectionIndex = 0
+				sections.forEach((section, index) => {
+					const sectionTop = section.offsetTop
+					const sectionHeight = section.offsetHeight
+
+					if (currentScrollTop >= sectionTop - sectionHeight * 0.3) {
+						currentSectionIndex = index
+					}
 				})
+
+				// Переходим к следующей секции
+				const nextSectionIndex = Math.min(
+					currentSectionIndex + 1,
+					sections.length - 1
+				)
+				const targetSection = sections[nextSectionIndex]
+
+				if (targetSection) {
+					mainElement.scrollTo({
+						top: targetSection.offsetTop,
+						behavior: 'smooth',
+					})
+				}
 			}
 		}
 	}
