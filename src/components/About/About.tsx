@@ -1,210 +1,299 @@
 import { motion } from 'framer-motion'
-import { User, MapPin, Calendar, Coffee, Code2, Heart, Bot } from 'lucide-react'
-import ScrollIndicator from '../ScrollIndicator/ScrollIndicator'
 
-const personalInfo = [
-	{
-		icon: MapPin,
-		label: 'Локация',
-		value: 'Минск',
-	},
-	{
-		icon: Calendar,
-		label: 'Опыт',
-		value: '1+ года',
-	},
-	{
-		icon: Coffee,
-		label: 'Любимый напиток',
-		value: 'Кофе ☕',
-	},
-	{
-		icon: Code2,
-		label: 'Любимый язык',
-		value: 'TypeScript',
-	},
-]
+interface AboutProps {
+	accentColor: string
+	isMobile: boolean
+}
 
-const interests = [
-	'💻 Frontend',
-	'⚡ Производительность',
-	'🎯 UX/UI',
-	'🔥 Красивый код',
-	'🔧 Новые инструменты',
-	'📖 Обучение',
-]
+const About = ({ accentColor, isMobile }: AboutProps) => {
+	const experiences = [
+		{
+			period: '2023 - Present',
+			role: 'Senior Frontend Developer',
+			company: 'Tech Solutions Inc.',
+			description:
+				'Leading frontend development for enterprise applications using React, TypeScript, and modern web technologies.',
+		},
+		{
+			period: '2021 - 2023',
+			role: 'Frontend Developer',
+			company: 'Digital Agency',
+			description:
+				'Developed responsive web applications and collaborated with design teams to create engaging user experiences.',
+		},
+		{
+			period: '2020 - 2021',
+			role: 'Junior Developer',
+			company: 'StartUp Co.',
+			description:
+				'Started my journey in web development, working on various projects and learning modern frameworks.',
+		},
+	]
 
-export default function About() {
+	const skills = [
+		{ name: 'React/Next.js', level: 95 },
+		{ name: 'TypeScript', level: 90 },
+		{ name: 'JavaScript', level: 95 },
+		{ name: 'CSS/SCSS', level: 85 },
+		{ name: 'Node.js', level: 80 },
+		{ name: 'Python', level: 75 },
+	]
+
+	const interests = [
+		{
+			icon: '🎮',
+			title: 'Game Development',
+			description: 'Creating interactive experiences',
+		},
+		{
+			icon: '🎵',
+			title: 'Music Production',
+			description: 'Electronic music and sound design',
+		},
+		{
+			icon: '📚',
+			title: 'Continuous Learning',
+			description: 'Always exploring new technologies',
+		},
+		{
+			icon: '🚀',
+			title: 'Innovation',
+			description: 'Building the future of web',
+		},
+	]
+
 	return (
-		<div className='w-full min-h-screen pt-24 px-4 sm:px-6 lg:px-8 bg-white/[0.02] flex items-center justify-center relative pb-32'>
+		<section
+			className={`h-screen overflow-y-auto pt-20 pb-8 ${
+				isMobile ? 'px-4' : 'px-8'
+			}`}
+		>
 			<div className='max-w-6xl mx-auto'>
+				{/* Header */}
 				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					viewport={{ once: true }}
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
 					className='text-center mb-16'
 				>
-					<div className='flex items-center justify-center gap-2 mb-4'>
-						<User className='text-accent' size={24} />
-						<span className='font-mono text-accent text-sm uppercase tracking-wider'>
-							Познакомимся
-						</span>
-					</div>
-					<h2 className='text-4xl md:text-5xl font-bold text-text-primary mb-6'>
-						Обо мне
+					<h2
+						className={`font-bold text-white mb-4 ${
+							isMobile ? 'text-3xl' : 'text-4xl lg:text-5xl'
+						}`}
+					>
+						About Me
 					</h2>
-					<p className='text-lg text-text-secondary max-w-2xl mx-auto'>
-						Привет! Я frontend-разработчик, который любит создавать красивые и
-						функциональные веб-приложения
+					<p
+						className={`text-gray-400 max-w-3xl mx-auto leading-relaxed ${
+							isMobile ? 'text-sm' : 'text-lg'
+						}`}
+					>
+						I'm a passionate frontend developer with{' '}
+						{new Date().getFullYear() - 2020}+ years of experience creating
+						beautiful, functional, and user-centered digital experiences.
 					</p>
 				</motion.div>
 
-				<div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-start'>
-					{/* Левая колонка - Основная информация */}
+				{/* Main Content */}
+				<div
+					className={`grid gap-12 ${
+						isMobile ? 'grid-cols-1' : 'lg:grid-cols-2'
+					}`}
+				>
+					{/* Experience */}
 					<motion.div
-						initial={{ opacity: 0, x: -50 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}
-						viewport={{ once: true }}
-						className='space-y-8'
+						initial={{ opacity: 0, x: -20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.2 }}
 					>
-						<div className='bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10'>
-							<h3 className='text-2xl font-semibold text-text-primary mb-6'>
-								Моя история
-							</h3>
-							<div className='space-y-4 text-text-secondary leading-relaxed'>
-								<p>
-									Начал свой путь в программировании с изучения основ
-									веб-разработки. Постепенно углублялся в современные технологии
-									и фреймворки.
-								</p>
-								<p>
-									Сегодня специализируюсь на создании интерактивных
-									пользовательских интерфейсов с использованием React,
-									TypeScript и современных инструментов разработки.
-								</p>
-								<p>
-									Всегда стремлюсь к совершенству в коде и постоянно изучаю
-									новые подходы к решению задач. Верю, что хороший код должен
-									быть не только функциональным, но и красивым.
-								</p>
-							</div>
-						</div>
-
-						{/* Личная информация */}
-						<div className='grid grid-cols-2 gap-4'>
-							{personalInfo.map((info, index) => (
+						<h3
+							className={`font-bold text-white mb-8 ${
+								isMobile ? 'text-xl' : 'text-2xl'
+							}`}
+							style={{ color: accentColor }}
+						>
+							Experience
+						</h3>
+						<div className='space-y-6'>
+							{experiences.map((exp, index) => (
 								<motion.div
-									key={info.label}
+									key={index}
 									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
-									viewport={{ once: true }}
-									className='bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 text-center group hover:border-accent/30 transition-all duration-300'
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ delay: 0.3 + index * 0.1 }}
+									className='border-l-2 border-gray-800 pl-6 relative'
 								>
-									<div className='inline-flex p-2 bg-accent/20 rounded-full mb-3 group-hover:bg-accent/30 transition-colors'>
-										<info.icon className='text-accent' size={20} />
+									<div
+										className='absolute w-3 h-3 rounded-full -left-2 top-2'
+										style={{ backgroundColor: accentColor }}
+									/>
+									<div
+										className={`text-sm text-gray-500 mb-1 ${
+											isMobile ? 'text-xs' : ''
+										}`}
+									>
+										{exp.period}
 									</div>
-									<div className='text-xs text-text-secondary mb-1'>
-										{info.label}
+									<h4
+										className={`font-semibold text-white mb-1 ${
+											isMobile ? 'text-base' : 'text-lg'
+										}`}
+									>
+										{exp.role}
+									</h4>
+									<div
+										className={`font-medium mb-2 ${
+											isMobile ? 'text-sm' : 'text-base'
+										}`}
+										style={{ color: accentColor }}
+									>
+										{exp.company}
 									</div>
-									<div className='text-sm font-medium text-text-primary'>
-										{info.value}
-									</div>
+									<p
+										className={`text-gray-400 ${
+											isMobile ? 'text-sm' : 'text-base'
+										}`}
+									>
+										{exp.description}
+									</p>
 								</motion.div>
 							))}
 						</div>
 					</motion.div>
 
-					{/* Правая колонка - Интересы и цели */}
+					{/* Skills */}
 					<motion.div
-						initial={{ opacity: 0, x: 50 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.6, delay: 0.3 }}
-						viewport={{ once: true }}
-						className='space-y-8'
+						initial={{ opacity: 0, x: 20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.4 }}
 					>
-						{/* Интересы */}
-						<div className='bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 not-sm:hidden'>
-							<h3 className='text-2xl font-semibold text-text-primary mb-6'>
-								Интересы
-							</h3>
-							<div className='grid grid-cols-2 gap-3'>
-								{interests.map((interest, index) => (
-									<motion.div
-										key={interest}
-										initial={{ opacity: 0, scale: 0.9 }}
-										whileInView={{ opacity: 1, scale: 1 }}
-										transition={{ duration: 0.4, delay: index * 0.1 + 0.5 }}
-										viewport={{ once: true }}
-										className='bg-white/5 rounded-lg p-3 text-center border border-white/10 hover:border-accent/30 transition-all duration-300 group'
-									>
-										<span className='text-sm text-text-secondary group-hover:text-text-primary transition-colors'>
-											{interest}
-										</span>
-									</motion.div>
-								))}
-							</div>
-						</div>
-
-						{/* Философия */}
-						<div className='bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10'>
-							<h3 className='text-2xl font-semibold text-text-primary mb-6'>
-								Моя философия
-							</h3>
-							<div className='space-y-4'>
-								<div className='flex items-start gap-3'>
-									<Heart className='text-accent mt-1 flex-shrink-0' size={20} />
-									<p className='text-text-secondary'>
-										<span className='text-accent font-medium'>
-											Пунктуальность
-										</span>{' '}
-										— таски должны быть закрыты в срок
-									</p>
-								</div>
-								<div className='flex items-start gap-3'>
-									<Code2 className='text-accent mt-1 flex-shrink-0' size={20} />
-									<p className='text-text-secondary'>
-										<span className='text-accent font-medium'>Простота</span> —
-										сложные вещи должны выглядеть просто
-									</p>
-								</div>
-								<div className='flex items-start gap-3'>
-									<Bot className='text-accent mt-1 flex-shrink-0' size={20} />
-									<p className='text-text-secondary'>
-										<span className='text-accent font-medium'>AI</span> — не
-										можешь победить - возглавь
-									</p>
-								</div>
-							</div>
-						</div>
-
-						{/* Fun Fact */}
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.6 }}
-							viewport={{ once: true }}
-							className='bg-gradient-to-r from-accent/10 to-accent/5 rounded-xl p-6 border border-accent/20'
+						<h3
+							className={`font-bold text-white mb-8 ${
+								isMobile ? 'text-xl' : 'text-2xl'
+							}`}
+							style={{ color: accentColor }}
 						>
-							<h4 className='text-lg font-semibold text-text-primary mb-2'>
-								💡 Fun Fact
-							</h4>
-							<p className='text-text-secondary text-sm'>
-								Написал свою первую строку кода в{' '}
-								<span className='text-accent font-mono'>
-									console.log("Hello World!")
-								</span>{' '}
-								и до сих пор получаю удовольствие от каждой новой строки!
-							</p>
-						</motion.div>
+							Skills
+						</h3>
+						<div className='space-y-6'>
+							{skills.map((skill, index) => (
+								<motion.div
+									key={skill.name}
+									initial={{ opacity: 0, x: 20 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ delay: 0.5 + index * 0.1 }}
+								>
+									<div className='flex justify-between mb-2'>
+										<span
+											className={`font-medium text-white ${
+												isMobile ? 'text-sm' : 'text-base'
+											}`}
+										>
+											{skill.name}
+										</span>
+										<span
+											className={`text-gray-400 ${
+												isMobile ? 'text-sm' : 'text-base'
+											}`}
+										>
+											{skill.level}%
+										</span>
+									</div>
+									<div className='w-full bg-gray-800 rounded-full h-2'>
+										<motion.div
+											className='h-2 rounded-full'
+											style={{ backgroundColor: accentColor }}
+											initial={{ width: 0 }}
+											animate={{ width: `${skill.level}%` }}
+											transition={{ delay: 0.7 + index * 0.1, duration: 0.8 }}
+										/>
+									</div>
+								</motion.div>
+							))}
+						</div>
 					</motion.div>
 				</div>
-			</div>
 
-			{/* Scroll Indicator */}
-			<ScrollIndicator nextSection='Проекты' />
-		</div>
+				{/* Interests */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.8 }}
+					className='mt-16'
+				>
+					<h3
+						className={`font-bold text-white mb-8 text-center ${
+							isMobile ? 'text-xl' : 'text-2xl'
+						}`}
+						style={{ color: accentColor }}
+					>
+						Interests & Hobbies
+					</h3>
+					<div
+						className={`grid gap-6 ${
+							isMobile
+								? 'grid-cols-1 sm:grid-cols-2'
+								: 'grid-cols-2 lg:grid-cols-4'
+						}`}
+					>
+						{interests.map((interest, index) => (
+							<motion.div
+								key={interest.title}
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.9 + index * 0.1 }}
+								className='bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-gray-700 transition-all duration-300 text-center group'
+								whileHover={{ y: -5 }}
+							>
+								<div
+									className={`text-4xl mb-4 ${
+										isMobile ? 'text-3xl' : 'text-4xl'
+									}`}
+								>
+									{interest.icon}
+								</div>
+								<h4
+									className={`font-semibold text-white mb-2 ${
+										isMobile ? 'text-base' : 'text-lg'
+									}`}
+								>
+									{interest.title}
+								</h4>
+								<p
+									className={`text-gray-400 ${
+										isMobile ? 'text-sm' : 'text-base'
+									}`}
+								>
+									{interest.description}
+								</p>
+							</motion.div>
+						))}
+					</div>
+				</motion.div>
+
+				{/* Quote */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 1.2 }}
+					className='mt-16 text-center'
+				>
+					<blockquote
+						className={`font-medium text-gray-300 mb-4 ${
+							isMobile ? 'text-base' : 'text-xl'
+						}`}
+					>
+						"Code is like humor. When you have to explain it, it's bad."
+					</blockquote>
+					<cite
+						className={`text-gray-500 ${isMobile ? 'text-sm' : 'text-base'}`}
+						style={{ color: accentColor }}
+					>
+						— Cory House
+					</cite>
+				</motion.div>
+			</div>
+		</section>
 	)
 }
+
+export default About

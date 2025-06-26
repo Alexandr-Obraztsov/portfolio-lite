@@ -1,209 +1,204 @@
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Code, Sparkles } from 'lucide-react'
-import ScrollIndicator from '../ScrollIndicator/ScrollIndicator'
-import InteractiveGrid from './InteractiveGrid'
-
-const roles = [
-	'Frontend Developer',
-	'React Specialist',
-	'UI/UX Enthusiast',
-	'JavaScript Expert',
-]
+import { useEffect, useState } from 'react'
 
 interface HeroProps {
-	isActive?: boolean
+	accentColor: string
+	isMobile: boolean
 }
 
-export default function Hero({ isActive = true }: HeroProps) {
-	const [currentRole, setCurrentRole] = useState(0)
+const Hero = ({ accentColor, isMobile }: HeroProps) => {
+	const [displayText, setDisplayText] = useState('')
+	const fullText = 'Frontend Developer'
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentRole(prev => (prev + 1) % roles.length)
-		}, 3000)
+		let index = 0
+		const timer = setInterval(() => {
+			if (index <= fullText.length) {
+				setDisplayText(fullText.slice(0, index))
+				index++
+			} else {
+				clearInterval(timer)
+			}
+		}, 100)
 
-		return () => clearInterval(interval)
+		return () => clearInterval(timer)
 	}, [])
 
-	const containerVariants = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.3,
-			},
-		},
+	const handleProjectsClick = () => {
+		;(
+			window as unknown as { goToSection: (index: number) => void }
+		).goToSection(2)
 	}
 
-	const itemVariants = {
-		hidden: { opacity: 0, y: 30 },
-		visible: {
-			opacity: 1,
-			y: 0,
-			transition: { duration: 0.6 },
-		},
+	const handleContactClick = () => {
+		;(
+			window as unknown as { goToSection: (index: number) => void }
+		).goToSection(4)
 	}
 
 	return (
-		<div className='w-full h-full flex flex-col items-center justify-center relative overflow-hidden'>
-			{/* Интерактивная сетка - только когда Hero активна */}
-			{isActive && (
-				<div className='absolute inset-0 z-0'>
-					<InteractiveGrid />
-				</div>
-			)}
+		<section className='relative h-screen flex items-center justify-center overflow-hidden pt-16'>
+			{/* Background particles */}
+			<div className='absolute inset-0'>
+				{!isMobile &&
+					[...Array(20)].map((_, i) => (
+						<motion.div
+							key={i}
+							className='absolute w-1 h-1 rounded-full opacity-30'
+							animate={{
+								x: [0, Math.random() * 100 - 50],
+								y: [0, Math.random() * 100 - 50],
+								opacity: [0.3, 0.8, 0.3],
+							}}
+							transition={{
+								duration: 3 + Math.random() * 2,
+								repeat: Infinity,
+								ease: 'easeInOut',
+							}}
+							style={{
+								left: `${Math.random() * 100}%`,
+								top: `${Math.random() * 100}%`,
+								backgroundColor: accentColor,
+							}}
+						/>
+					))}
+			</div>
 
-			<div className='max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10'>
+			<div
+				className={`relative z-10 text-center px-4 ${
+					isMobile ? 'px-6' : 'px-8'
+				}`}
+			>
 				<motion.div
-					variants={containerVariants}
-					initial='hidden'
-					animate='visible'
-					className='space-y-2 sm:space-y-8'
+					initial={{ opacity: 0, y: 30 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8 }}
+					className='space-y-6'
 				>
-					{/* Greeting */}
-					<motion.div variants={itemVariants} className='space-y-2'>
-						<div
-							className='flex items-center justify-center space-x-2  mb-2 sm:mb-4'
-							style={{ color: 'var(--color-accent)' }}
-						>
-							<Sparkles size={20} className='animate-pulse' />
-							<span className='font-mono text-sm'>Привет, меня зовут</span>
-							<Sparkles size={20} className='animate-pulse' />
-						</div>
-					</motion.div>
-
-					{/* Name */}
+					{/* Main title */}
 					<motion.h1
-						variants={itemVariants}
-						className='text-4xl sm:text-5xl md:text-7xl font-bold mb-4'
-						style={{ color: 'var(--color-text-primary)' }}
+						className={`font-bold text-white leading-tight ${
+							isMobile ? 'text-4xl sm:text-5xl' : 'text-6xl lg:text-7xl'
+						}`}
+						initial={{ opacity: 0, scale: 0.9 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
 					>
-						<span className='bg-gradient-to-r from-white via-[var(--color-accent)] to-white bg-clip-text text-transparent'>
-							Образцов Александр
+						Hi, I'm{' '}
+						<span
+							className='bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent'
+							style={{
+								backgroundImage: `linear-gradient(135deg, ${accentColor}, white)`,
+								WebkitBackgroundClip: 'text',
+								WebkitTextFillColor: 'transparent',
+							}}
+						>
+							Developer
 						</span>
 					</motion.h1>
 
-					{/* Animated Role */}
+					{/* Animated role */}
 					<motion.div
-						variants={itemVariants}
-						className='h-12 sm:h-16 flex items-center justify-center'
+						className={`font-mono ${isMobile ? 'text-lg' : 'text-xl'}`}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ delay: 0.5 }}
 					>
-						<div
-							className='text-xl sm:text-2xl md:text-3xl font-semibold relative'
-							style={{ color: 'var(--color-text-secondary)' }}
-						>
-							<Code
-								className='inline-block mr-2'
-								style={{ color: 'var(--color-accent)' }}
-								size={28}
-							/>
-							<motion.span
-								key={currentRole}
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -20 }}
-								transition={{ duration: 0.5 }}
-								className='inline-block'
-							>
-								{roles[currentRole]}
-							</motion.span>
-						</div>
+						<span className='text-gray-400'>&gt; </span>
+						<span style={{ color: accentColor }}>{displayText}</span>
+						<motion.span
+							className='inline-block w-0.5 h-6 ml-1'
+							style={{ backgroundColor: accentColor }}
+							animate={{ opacity: [1, 0] }}
+							transition={{ duration: 0.8, repeat: Infinity }}
+						/>
 					</motion.div>
 
 					{/* Description */}
 					<motion.p
-						variants={itemVariants}
-						className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed'
-						style={{ color: 'var(--color-text-secondary)' }}
+						className={`text-gray-300 max-w-2xl mx-auto leading-relaxed ${
+							isMobile ? 'text-base px-2' : 'text-lg'
+						}`}
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.8 }}
 					>
-						Создаю современные веб-приложения с фокусом на{' '}
-						<span
-							className='font-semibold'
-							style={{ color: 'var(--color-accent)' }}
-						>
-							пользовательский опыт
-						</span>{' '}
-						и{' '}
-						<span
-							className='font-semibold'
-							style={{ color: 'var(--color-accent)' }}
-						>
-							производительность
-						</span>
-						. Специализируюсь на React, TypeScript и современных фронтенд
-						технологиях.
+						I create beautiful, functional, and user-centered digital
+						experiences. Passionate about clean code and modern technologies.
 					</motion.p>
 
-					{/* CTA Buttons */}
+					{/* Action buttons */}
 					<motion.div
-						variants={itemVariants}
-						className='flex flex-col sm:flex-row gap-4 justify-center items-center pt-8'
+						className={`flex gap-4 justify-center ${
+							isMobile ? 'flex-col items-center space-y-4' : 'flex-row'
+						}`}
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 1 }}
 					>
 						<motion.button
-							onClick={() => {
-								const mainElement = document.querySelector('main')
-								if (mainElement) {
-									const sections = mainElement.querySelectorAll('section')
-									const targetSection = sections[2] // Projects section (index 2)
-
-									if (targetSection) {
-										mainElement.scrollTo({
-											top: targetSection.offsetTop,
-											behavior: 'smooth',
-										})
-									}
-								}
-							}}
-							className='px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg'
+							onClick={handleProjectsClick}
+							className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+								isMobile ? 'w-64' : ''
+							}`}
 							style={{
-								backgroundColor: 'var(--color-accent)',
-								color: 'var(--color-dark)',
-								boxShadow: '0 0 0 0 rgba(0, 255, 136, 0.25)',
+								backgroundColor: accentColor,
+								color: 'black',
 							}}
-							whileHover={{
-								scale: 1.05,
-								boxShadow: '0 10px 25px rgba(0, 255, 136, 0.25)',
-							}}
+							whileHover={{ scale: 1.05, y: -2 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							Посмотреть работы
+							View Projects
 						</motion.button>
-						<motion.button
-							onClick={() => {
-								const mainElement = document.querySelector('main')
-								if (mainElement) {
-									const sections = mainElement.querySelectorAll('section')
-									const targetSection = sections[4] // Contact section (index 4)
 
-									if (targetSection) {
-										mainElement.scrollTo({
-											top: targetSection.offsetTop,
-											behavior: 'smooth',
-										})
-									}
-								}
-							}}
-							className='px-8 py-4 border-2 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105'
+						<motion.button
+							onClick={handleContactClick}
+							className={`px-8 py-3 rounded-lg border-2 font-semibold transition-all duration-300 ${
+								isMobile ? 'w-64' : ''
+							}`}
 							style={{
-								borderColor: 'var(--color-accent)',
-								color: 'var(--color-accent)',
+								borderColor: accentColor,
+								color: accentColor,
 							}}
 							whileHover={{
 								scale: 1.05,
-								backgroundColor: 'var(--color-accent)',
-								color: 'var(--color-dark)',
+								y: -2,
+								backgroundColor: accentColor,
+								color: 'black',
 							}}
 							whileTap={{ scale: 0.95 }}
 						>
-							Связаться со мной
+							Get In Touch
 						</motion.button>
 					</motion.div>
+
+					{/* Scroll indicator - только на десктопе */}
+					{!isMobile && (
+						<motion.div
+							className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 1.5 }}
+						>
+							<motion.div
+								className='w-6 h-10 border-2 rounded-full flex justify-center'
+								style={{ borderColor: accentColor }}
+								animate={{ y: [0, 10, 0] }}
+								transition={{ duration: 1.5, repeat: Infinity }}
+							>
+								<motion.div
+									className='w-1 h-3 rounded-full mt-2'
+									style={{ backgroundColor: accentColor }}
+									animate={{ opacity: [1, 0.3, 1] }}
+									transition={{ duration: 1.5, repeat: Infinity }}
+								/>
+							</motion.div>
+						</motion.div>
+					)}
 				</motion.div>
 			</div>
-
-			{/* Scroll Indicator */}
-			<ScrollIndicator nextSection='Обо мне' delay={1.5} />
-		</div>
+		</section>
 	)
 }
+
+export default Hero

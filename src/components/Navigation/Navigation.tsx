@@ -1,207 +1,127 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 
-const navItems = [
-	{ name: 'Главная', section: 0 },
-	{ name: 'Обо мне', section: 1 },
-	{ name: 'Проекты', section: 2 },
-	{ name: 'Навыки', section: 3 },
-	{ name: 'Контакты', section: 4 },
-]
+interface NavigationProps {
+	activeSection: number
+	accentColor: string
+}
 
-const socialLinks = [
-	{ icon: Github, href: 'https://github.com', label: 'GitHub' },
-	{ icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-	{ icon: Mail, href: 'mailto:your@email.com', label: 'Email' },
-]
+const Navigation = ({ activeSection, accentColor }: NavigationProps) => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-export default function Navigation() {
-	const [isOpen, setIsOpen] = useState(false)
-	const [scrolled, setScrolled] = useState(false)
-	const [activeSection, setActiveSection] = useState(0)
+	const navItems = [
+		{ name: 'Home', index: 0 },
+		{ name: 'About', index: 1 },
+		{ name: 'Projects', index: 2 },
+		{ name: 'Skills', index: 3 },
+		{ name: 'Contact', index: 4 },
+	]
 
-	useEffect(() => {
-		const mainElement = document.querySelector('main')
-		if (!mainElement) return
-
-		const handleScroll = () => {
-			const scrollTop = mainElement.scrollTop
-			const sections = mainElement.querySelectorAll('section')
-
-			let currentSection = 0
-			sections.forEach((section, index) => {
-				const sectionTop = section.offsetTop
-				const sectionHeight = section.offsetHeight
-
-				// Секция считается активной, если видна больше чем на 30%
-				if (scrollTop >= sectionTop - sectionHeight * 0.3) {
-					currentSection = index
-				}
-			})
-
-			setActiveSection(currentSection)
-			setScrolled(scrollTop > 50)
+	const goToSection = (index: number) => {
+		const goToSectionFn = (
+			window as unknown as { goToSection?: (index: number) => void }
+		).goToSection
+		if (goToSectionFn) {
+			goToSectionFn(index)
 		}
-
-		mainElement.addEventListener('scroll', handleScroll)
-		return () => mainElement.removeEventListener('scroll', handleScroll)
-	}, [])
-
-	const scrollToSection = (sectionIndex: number) => {
-		const mainElement = document.querySelector('main')
-		if (mainElement) {
-			const sections = mainElement.querySelectorAll('section')
-			const targetSection = sections[sectionIndex]
-
-			if (targetSection) {
-				mainElement.scrollTo({
-					top: targetSection.offsetTop,
-					behavior: 'smooth',
-				})
-			}
-		}
-		setIsOpen(false)
+		setIsMenuOpen(false)
 	}
 
 	return (
-		<>
-			<motion.nav
-				initial={{ y: -100 }}
-				animate={{ y: 0 }}
-				className={`fixed top-0 w-full z-[60] transition-all duration-300 ${
-					scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
-				}`}
-				style={{
-					backgroundColor: scrolled ? 'rgba(10, 10, 10, 0.9)' : 'transparent',
-				}}
-			>
-				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-					<div className='flex justify-between items-center h-16'>
-						<motion.div
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ delay: 0.2 }}
-							className='text-xl font-mono font-semibold nav-logo cursor-pointer'
-							onClick={() => scrollToSection(0)}
-						>
-							{'<Obratsov />'}
-						</motion.div>
-
-						{/* Desktop Navigation */}
-						<div className='hidden md:flex items-center space-x-8'>
-							{navItems.map((item, index) => (
-								<motion.button
-									key={item.name}
-									onClick={() => scrollToSection(item.section)}
-									initial={{ opacity: 0, y: -20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.1 * index }}
-									className={`nav-link transition-colors duration-300 relative group ${
-										activeSection === item.section ? 'text-accent' : ''
-									}`}
-								>
-									{item.name}
-									<span
-										className={`nav-underline absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${
-											activeSection === item.section
-												? 'w-full bg-accent'
-												: 'w-0 group-hover:w-full bg-accent'
-										}`}
-									></span>
-								</motion.button>
-							))}
-						</div>
-
-						{/* Social Links */}
-						<div className='hidden md:flex items-center space-x-4'>
-							{socialLinks.map((social, index) => (
-								<motion.a
-									key={social.label}
-									href={social.href}
-									target='_blank'
-									rel='noopener noreferrer'
-									initial={{ opacity: 0, scale: 0 }}
-									animate={{ opacity: 1, scale: 1 }}
-									transition={{ delay: 0.3 + 0.1 * index }}
-									className='social-link transition-all duration-300 hover:scale-110'
-								>
-									<social.icon size={18} />
-								</motion.a>
-							))}
-						</div>
-
-						{/* Mobile menu button */}
-						<motion.button
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ delay: 0.3 }}
-							className='md:hidden mobile-menu-btn transition-colors'
-							onClick={() => setIsOpen(!isOpen)}
-						>
-							{isOpen ? <X size={24} /> : <Menu size={24} />}
-						</motion.button>
-					</div>
-				</div>
-			</motion.nav>
-
-			{/* Mobile Navigation */}
-			<AnimatePresence>
-				{isOpen && (
+		<nav className='fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800'>
+			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+				<div className='flex items-center justify-between h-16'>
+					{/* Logo */}
 					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						className='fixed inset-0 z-40 md:hidden'
+						className='text-xl font-bold text-white'
+						whileHover={{ scale: 1.05 }}
 					>
-						<div
-							className='fixed inset-0'
-							style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-							onClick={() => setIsOpen(false)}
-						/>
-						<motion.div
-							initial={{ x: '100%' }}
-							animate={{ x: 0 }}
-							exit={{ x: '100%' }}
-							transition={{ type: 'tween', duration: 0.3 }}
-							className='fixed right-0 top-0 h-full w-64 border-l border-white/10 p-6 mobile-nav'
-						>
-							<div className='flex flex-col space-y-6 mt-16'>
-								{navItems.map((item, index) => (
-									<motion.button
-										key={item.name}
-										onClick={() => scrollToSection(item.section)}
-										initial={{ opacity: 0, x: 20 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.1 * index }}
-										className={`mobile-nav-link transition-colors duration-300 text-left ${
-											activeSection === item.section ? 'text-accent' : ''
-										}`}
-									>
-										{item.name}
-									</motion.button>
-								))}
-								<div className='flex space-x-4 pt-6 border-t border-white/10'>
-									{socialLinks.map((social, index) => (
-										<motion.a
-											key={social.label}
-											href={social.href}
-											target='_blank'
-											rel='noopener noreferrer'
-											initial={{ opacity: 0, y: 20 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{ delay: 0.4 + 0.1 * index }}
-											className='mobile-social-link transition-colors'
-										>
-											<social.icon size={20} />
-										</motion.a>
-									))}
-								</div>
-							</div>
-						</motion.div>
+						Portfolio
 					</motion.div>
-				)}
-			</AnimatePresence>
-		</>
+
+					{/* Desktop Navigation */}
+					<div className='hidden md:flex space-x-8'>
+						{navItems.map(item => (
+							<motion.button
+								key={item.name}
+								onClick={() => goToSection(item.index)}
+								className={`text-sm font-medium transition-colors duration-200 ${
+									activeSection === item.index
+										? 'text-white'
+										: 'text-gray-400 hover:text-white'
+								}`}
+								whileHover={{ y: -2 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								{item.name}
+								{activeSection === item.index && (
+									<motion.div
+										className='h-0.5 mt-1 rounded-full'
+										style={{ backgroundColor: accentColor }}
+										layoutId='activeTab'
+									/>
+								)}
+							</motion.button>
+						))}
+					</div>
+
+					{/* Mobile menu button */}
+					<motion.button
+						className='md:hidden text-white'
+						onClick={() => setIsMenuOpen(!isMenuOpen)}
+						whileTap={{ scale: 0.95 }}
+					>
+						<div className='w-6 h-6 flex flex-col justify-center space-y-1'>
+							<motion.div
+								className='w-full h-0.5 bg-white'
+								animate={
+									isMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }
+								}
+							/>
+							<motion.div
+								className='w-full h-0.5 bg-white'
+								animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+							/>
+							<motion.div
+								className='w-full h-0.5 bg-white'
+								animate={
+									isMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }
+								}
+							/>
+						</div>
+					</motion.button>
+				</div>
+
+				{/* Mobile Navigation */}
+				<motion.div
+					className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}
+					initial={{ opacity: 0, y: -10 }}
+					animate={isMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+					transition={{ duration: 0.2 }}
+				>
+					<div className='py-4 space-y-2 border-t border-gray-800'>
+						{navItems.map(item => (
+							<motion.button
+								key={item.name}
+								onClick={() => goToSection(item.index)}
+								className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors duration-200 ${
+									activeSection === item.index
+										? 'text-white'
+										: 'text-gray-400 hover:text-white'
+								}`}
+								style={{
+									color: activeSection === item.index ? accentColor : undefined,
+								}}
+								whileTap={{ scale: 0.95 }}
+							>
+								{item.name}
+							</motion.button>
+						))}
+					</div>
+				</motion.div>
+			</div>
+		</nav>
 	)
 }
+
+export default Navigation
