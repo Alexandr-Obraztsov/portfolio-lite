@@ -129,7 +129,7 @@ body {
 }
 
 /* Custom scrollbar for main container */
-main::-webkit-scrollbar {
+::-webkit-scrollbar {
 	display: none;
 }
 

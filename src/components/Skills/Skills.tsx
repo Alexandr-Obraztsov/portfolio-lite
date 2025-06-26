@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Code, Palette, Brain, Zap } from 'lucide-react'
+import ScrollIndicator from '../ScrollIndicator/ScrollIndicator'
 
 const skillCategories = [
 	{
@@ -110,9 +111,9 @@ function SkillCategory({
 	)
 }
 
-export default function Skills() {
+const Skills = () => {
 	return (
-		<div className='w-full h-screen py-8 px-4 sm:px-6 lg:px-8 bg-white/[0.02] flex items-center justify-center'>
+		<div className='w-full min-h-screen py-24 px-4 bg-white/[0.02] relative flex flex-col items-center justify-center'>
 			<div className='max-w-7xl mx-auto'>
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
@@ -181,6 +182,11 @@ export default function Skills() {
 					</div>
 				</motion.div>
 			</div>
+
+			{/* Scroll Indicator */}
+			<ScrollIndicator nextSection='Контакты' />
 		</div>
 	)
 }
+
+export default Skills

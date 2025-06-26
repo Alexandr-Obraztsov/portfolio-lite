@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown, Code, Sparkles } from 'lucide-react'
+import { Code, Sparkles } from 'lucide-react'
+import ScrollIndicator from '../ScrollIndicator/ScrollIndicator'
 import InteractiveGrid from './InteractiveGrid'
 
 const roles = [
@@ -45,7 +46,7 @@ export default function Hero({ isActive = true }: HeroProps) {
 	}
 
 	return (
-		<div className='w-full h-full flex items-center justify-center relative overflow-hidden'>
+		<div className='w-full h-full flex flex-col items-center justify-center relative overflow-hidden'>
 			{/* Интерактивная сетка - только когда Hero активна */}
 			{isActive && (
 				<div className='absolute inset-0 z-0'>
@@ -58,12 +59,12 @@ export default function Hero({ isActive = true }: HeroProps) {
 					variants={containerVariants}
 					initial='hidden'
 					animate='visible'
-					className='space-y-8'
+					className='space-y-2 sm:space-y-8'
 				>
 					{/* Greeting */}
 					<motion.div variants={itemVariants} className='space-y-2'>
 						<div
-							className='flex items-center justify-center space-x-2 mb-4'
+							className='flex items-center justify-center space-x-2  mb-2 sm:mb-4'
 							style={{ color: 'var(--color-accent)' }}
 						>
 							<Sparkles size={20} className='animate-pulse' />
@@ -75,7 +76,7 @@ export default function Hero({ isActive = true }: HeroProps) {
 					{/* Name */}
 					<motion.h1
 						variants={itemVariants}
-						className='text-5xl md:text-7xl font-bold mb-4'
+						className='text-4xl sm:text-5xl md:text-7xl font-bold mb-4'
 						style={{ color: 'var(--color-text-primary)' }}
 					>
 						<span className='bg-gradient-to-r from-white via-[var(--color-accent)] to-white bg-clip-text text-transparent'>
@@ -86,10 +87,10 @@ export default function Hero({ isActive = true }: HeroProps) {
 					{/* Animated Role */}
 					<motion.div
 						variants={itemVariants}
-						className='h-16 flex items-center justify-center'
+						className='h-12 sm:h-16 flex items-center justify-center'
 					>
 						<div
-							className='text-2xl md:text-3xl font-semibold relative'
+							className='text-xl sm:text-2xl md:text-3xl font-semibold relative'
 							style={{ color: 'var(--color-text-secondary)' }}
 						>
 							<Code
@@ -113,7 +114,7 @@ export default function Hero({ isActive = true }: HeroProps) {
 					{/* Description */}
 					<motion.p
 						variants={itemVariants}
-						className='text-lg md:text-xl max-w-2xl mx-auto leading-relaxed'
+						className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed'
 						style={{ color: 'var(--color-text-secondary)' }}
 					>
 						Создаю современные веб-приложения с фокусом на{' '}
@@ -192,32 +193,7 @@ export default function Hero({ isActive = true }: HeroProps) {
 			</div>
 
 			{/* Scroll Indicator */}
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 1.5, duration: 0.5 }}
-				className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
-			>
-				<motion.div
-					animate={{ y: [0, 10, 0] }}
-					transition={{ duration: 2, repeat: Infinity }}
-					className='flex flex-col items-center cursor-pointer transition-colors'
-					style={{ color: 'var(--color-text-secondary)' }}
-					whileHover={{ color: 'var(--color-accent)' }}
-					onClick={() => {
-						const mainElement = document.querySelector('main')
-						if (mainElement) {
-							mainElement.scrollTo({
-								top: window.innerHeight,
-								behavior: 'smooth',
-							})
-						}
-					}}
-				>
-					<span className='text-sm font-mono mb-2'>Скролл</span>
-					<ChevronDown size={20} />
-				</motion.div>
-			</motion.div>
+			<ScrollIndicator nextSection='Обо мне' delay={1.5} />
 		</div>
 	)
 }

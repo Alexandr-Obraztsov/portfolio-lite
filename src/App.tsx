@@ -1,22 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import Navigation from './components/Navigation'
-import Hero from './components/Hero'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-
-function LoadingSpinner() {
-	return (
-		<div className='fixed inset-0 flex items-center justify-center bg-dark z-50'>
-			<div className='flex flex-col items-center space-y-4'>
-				<div className='w-12 h-12 border-2 border-accent/30 border-t-accent rounded-full animate-spin'></div>
-				<p className='text-accent font-mono'>Загрузка...</p>
-			</div>
-		</div>
-	)
-}
+import Navigation from './components/Navigation/Navigation'
+import Hero from './components/Hero/Hero'
+import About from './components/About/About'
+import Projects from './components/Projects/Projects'
+import Skills from './components/Skills/Skills'
+import Contact from './components/Contact/Contact'
+import Footer from './components/Footer/Footer'
 
 function App() {
 	const [activeSection, setActiveSection] = useState(0)
@@ -35,8 +25,18 @@ function App() {
 			if (!mainRef.current) return
 
 			const scrollTop = mainRef.current.scrollTop
-			const windowHeight = window.innerHeight
-			const currentSection = Math.round(scrollTop / windowHeight)
+			const sections = mainRef.current.querySelectorAll('section')
+
+			let currentSection = 0
+			sections.forEach((section, index) => {
+				const sectionTop = section.offsetTop
+				const sectionHeight = section.offsetHeight
+
+				// Секция считается активной, если видна больше чем на 30%
+				if (scrollTop >= sectionTop - sectionHeight * 0.3) {
+					currentSection = index
+				}
+			})
 
 			if (currentSection !== activeSection) {
 				setActiveSection(currentSection)
@@ -70,10 +70,19 @@ function App() {
 					<Hero isActive={activeSection === 0} />
 				</motion.section>
 
+				{/* About Section */}
+				<motion.section
+					className='snap-start min-h-screen flex items-center justify-center overflow-y-auto relative'
+					animate={scrollAnimate(1)}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
+				>
+					<About />
+				</motion.section>
+
 				{/* Projects Section */}
 				<motion.section
-					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
-					animate={scrollAnimate(1)}
+					className='snap-start min-h-screen flex items-center justify-center overflow-y-auto relative'
+					animate={scrollAnimate(2)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
 					<Projects />
@@ -81,19 +90,17 @@ function App() {
 
 				{/* Skills Section */}
 				<motion.section
-					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
-					animate={scrollAnimate(2)}
+					className='snap-start min-h-screen flex items-center justify-center relative'
+					animate={scrollAnimate(3)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
-					<div className='w-full'>
-						<Skills />
-					</div>
+					<Skills />
 				</motion.section>
 
 				{/* Contact Section */}
 				<motion.section
-					className='snap-start h-screen flex items-center justify-center overflow-y-auto relative'
-					animate={scrollAnimate(3)}
+					className='snap-start min-h-screen flex flex-col items-center justify-center relative'
+					animate={scrollAnimate(4)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
 					<div className='w-full'>

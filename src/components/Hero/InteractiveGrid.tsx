@@ -191,8 +191,7 @@ export default function InteractiveGrid() {
 	return (
 		<canvas
 			ref={canvasRef}
-			className='absolute inset-0 pointer-events-none opacity-60'
-			style={{ mixBlendMode: 'screen' }}
+			className='absolute inset-0 pointer-events-none opacity-100 mix-blend-screen'
 		/>
 	)
 }

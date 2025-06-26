@@ -1,32 +1,25 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import {
-	Mail,
-	Phone,
-	MapPin,
-	Send,
-	Github,
-	Linkedin,
-	Twitter,
-} from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
+import { Telegram } from '../../assets/telegram'
 
 const contactInfo = [
 	{
 		icon: Mail,
 		label: 'Email',
-		value: 'your@email.com',
-		href: 'mailto:your@email.com',
+		value: 'obraztsov.official@gmail.com',
+		href: 'mailto:obraztsov.official@gmail.com',
 	},
 	{
 		icon: Phone,
 		label: 'Телефон',
-		value: '+7 (XXX) XXX-XX-XX',
-		href: 'tel:+7XXXXXXXXXX',
+		value: '+375 (33) 992-29-43',
+		href: 'tel:+375339922943',
 	},
 	{
 		icon: MapPin,
 		label: 'Локация',
-		value: 'Москва, Россия',
+		value: 'Минск, Беларусь',
 		href: '#',
 	},
 ]
@@ -35,20 +28,20 @@ const socialLinks = [
 	{
 		icon: Github,
 		label: 'GitHub',
-		href: 'https://github.com',
+		href: 'https://github.com/Alexandr-Obraztsov',
 		color: 'hover:text-white',
 	},
 	{
 		icon: Linkedin,
 		label: 'LinkedIn',
-		href: 'https://linkedin.com',
+		href: 'https://www.linkedin.com/in/obraztsov-alexandr-047369349/',
 		color: 'hover:text-blue-400',
 	},
 	{
-		icon: Twitter,
-		label: 'Twitter',
-		href: 'https://twitter.com',
-		color: 'hover:text-blue-300',
+		icon: Telegram,
+		label: 'Telegram',
+		href: 'https://t.me/obraztsov_alexandr',
+		color: 'hover:text-[#6cc8e1]',
 	},
 ]
 
@@ -83,7 +76,7 @@ export default function Contact() {
 	}
 
 	return (
-		<div className='w-full h-full py-8 px-4 sm:px-6 lg:px-8 overflow-y-auto'>
+		<div className='w-full pt-24 pb-12 px-4 relative'>
 			<div className='max-w-7xl mx-auto'>
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
@@ -153,6 +146,7 @@ export default function Contact() {
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.3 }}
 							viewport={{ once: true }}
+							className='flex flex-col not-lg:items-center not-lg:justify-center'
 						>
 							<h4 className='text-lg font-semibold text-text-primary mb-4'>
 								Социальные сети
