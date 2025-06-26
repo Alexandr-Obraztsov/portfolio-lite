@@ -103,7 +103,7 @@ function App() {
 					animate={scrollAnimate(4)}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
-					<div className='w-full'>
+					<div className='w-full min-h-screen flex flex-col'>
 						<Contact />
 						<Footer />
 					</div>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, ArrowUp } from 'lucide-react'
+import { Heart, ArrowUp, Github, Linkedin, Mail } from 'lucide-react'
 
 export default function Footer() {
 	const scrollToTop = () => {
@@ -9,36 +9,90 @@ export default function Footer() {
 		}
 	}
 
+	const socialLinks = [
+		{
+			name: 'GitHub',
+			icon: <Github className='w-5 h-5' />,
+			url: 'https://github.com',
+			color: 'hover:text-white',
+		},
+		{
+			name: 'LinkedIn',
+			icon: <Linkedin className='w-5 h-5' />,
+			url: 'https://linkedin.com',
+			color: 'hover:text-blue-400',
+		},
+		{
+			name: 'Email',
+			icon: <Mail className='w-5 h-5' />,
+			url: 'mailto:your.email@example.com',
+			color: 'hover:text-emerald-400',
+		},
+	]
+
 	return (
-		<div className='w-full py-8 px-4 sm:px-6 lg:px-8 border-t border-white/10'>
-			<div className='max-w-7xl mx-auto'>
-				<div className='flex flex-col md:flex-row justify-between items-center gap-4'>
+		<footer className='border-t border-slate-700/50 mt-auto'>
+			<div className='max-w-7xl mx-auto px-6 py-6'>
+				{/* Main Content */}
+				<div className='flex flex-row justify-between items-center gap-8'>
+					{/* Left Side - Social Links */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5 }}
+						transition={{ duration: 0.6 }}
 						viewport={{ once: true }}
-						className='flex items-center gap-2 text-text-secondary'
+						className='flex gap-4'
 					>
-						<span>© 2024 Создано с</span>
-						<Heart size={16} className='text-accent animate-pulse' />
-						<span>используя React & Three.js</span>
+						{socialLinks.map((link, index) => (
+							<motion.a
+								key={link.name}
+								href={link.url}
+								target='_blank'
+								rel='noopener noreferrer'
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.6, delay: index * 0.1 }}
+								viewport={{ once: true }}
+								whileHover={{ scale: 1.1, y: -2 }}
+								whileTap={{ scale: 0.95 }}
+								className={`p-3 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 text-slate-400 transition-all duration-300 ${link.color} hover:border-emerald-500/50`}
+							>
+								{link.icon}
+							</motion.a>
+						))}
 					</motion.div>
 
+					{/* Center - Copyright */}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.3 }}
+						viewport={{ once: true }}
+						className='items-center gap-2 text-slate-400 text-center hidden md:flex'
+					>
+						<span>© 2025 Создано с</span>
+						<Heart className='w-4 h-4 text-emerald-400 animate-pulse' />
+						<span> Александром Образцовым</span>
+					</motion.div>
+
+					{/* Right Side - Scroll to Top */}
 					<motion.button
 						onClick={scrollToTop}
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.1 }}
+						transition={{ duration: 0.6, delay: 0.6 }}
 						viewport={{ once: true }}
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
-						className='p-2 bg-white/5 rounded-full hover:bg-accent/20 transition-all duration-300 text-text-secondary hover:text-accent'
+						whileHover={{ scale: 1.1, y: -2 }}
+						whileTap={{ scale: 0.95 }}
+						className='group p-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl text-white shadow-lg hover:shadow-emerald-500/25 transition-all duration-300'
 					>
-						<ArrowUp size={20} />
+						<ArrowUp className='w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-300' />
 					</motion.button>
 				</div>
 			</div>
-		</div>
+
+			{/* Decorative Bottom Line */}
+			<div className='w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500' />
+		</footer>
 	)
 }
