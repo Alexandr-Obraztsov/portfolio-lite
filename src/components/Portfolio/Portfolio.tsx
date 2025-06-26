@@ -1,69 +1,73 @@
 export default function Portfolio() {
 	const projects = [
 		{
-			title: 'Air Force Publicity',
-			category: 'Branding & Design',
-			image: '/project1.jpg',
+			title: 'E-Commerce Platform',
+			category: 'Full Stack Web App',
 		},
 		{
-			title: 'By Navarra Rebrand',
-			category: 'Brand Identity',
-			image: '/project2.jpg',
+			title: 'Task Manager Dashboard',
+			category: 'React Application',
 		},
 		{
-			title: 'Hair Expo Australia',
-			category: 'Event Design',
-			image: '/project3.jpg',
+			title: 'Weather Forecast App',
+			category: 'API Integration',
 		},
 		{
-			title: "Horse's Head",
-			category: 'Logo Design',
-			image: '/project4.jpg',
+			title: 'Portfolio Website',
+			category: 'Personal Branding',
 		},
 		{
-			title: 'Mining / Industrial Expos',
-			category: 'Exhibition Design',
-			image: '/project5.jpg',
+			title: 'Social Media Dashboard',
+			category: 'Data Visualization',
 		},
 		{
-			title: 'No Readgrets Book Club',
-			category: 'Brand Identity',
-			image: '/project6.jpg',
+			title: 'Landing Page Collection',
+			category: 'UI/UX Design',
 		},
 	]
 
 	return (
-		<div className='min-h-screen bg-white py-20 px-8'>
+		<div className='min-h-screen bg-[#F4D03F] py-20 px-8'>
 			<div className='max-w-6xl mx-auto'>
 				{/* Заголовок */}
 				<div className='text-center mb-16'>
 					<h2 className='text-6xl md:text-8xl font-black text-black mb-4'>
-						PortfOLio
+						PORTF<span className='opacity-50'>OLIO</span>
 					</h2>
 				</div>
 
-				{/* Сетка проектов */}
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+				{/* Список проектов */}
+				<div className='space-y-8'>
 					{projects.map((project, index) => (
-						<div key={index} className='group cursor-pointer'>
-							{/* Изображение проекта */}
-							<div className='aspect-square bg-gray-200 mb-4 overflow-hidden transition-all duration-300 hover:scale-105'>
-								<div className='w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center'>
-									<span className='text-gray-600 text-sm'>{project.title}</span>
-								</div>
-							</div>
-
-							{/* Информация о проекте */}
-							<div className='text-left'>
-								<h3 className='text-lg font-medium text-black mb-1 hover-underline'>
+						<div
+							key={index}
+							className='group cursor-pointer border-b border-black/20 pb-4 hover:border-black/50 transition-colors'
+						>
+							<div className='flex flex-col md:flex-row md:items-center md:justify-between'>
+								<h3 className='text-2xl md:text-3xl font-black text-black mb-2 md:mb-0 hover:opacity-70 transition-opacity'>
 									{project.title}
 								</h3>
-								<p className='text-sm text-gray-600 uppercase tracking-wider'>
+								<p className='text-sm text-black/70 uppercase tracking-wider'>
 									{project.category}
 								</p>
 							</div>
 						</div>
 					))}
+				</div>
+
+				{/* Дополнительная информация */}
+				<div className='text-center mt-16'>
+					<p className='text-lg text-black/80'>
+						More projects available on GitHub
+					</p>
+					<a
+						href='https://github.com/Alexandr-Obraztsov'
+						target='_blank'
+						rel='noopener noreferrer'
+						className='inline-block mt-4 text-black font-bold hover:opacity-70 transition-opacity'
+					>
+						github.com/Alexandr-Obraztsov →
+					</a>
 				</div>
 			</div>
 		</div>

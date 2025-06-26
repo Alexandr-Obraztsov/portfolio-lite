@@ -1,59 +1,123 @@
-import { div } from 'framer-motion/client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function Hero() {
-	const [currentSkill, setCurrentSkill] = useState(0)
-
-	const skills = [
-		'FRONTEND DEVELOPER',
-		'CREATIVE PROBLEM SOLVER',
-		'UI/UX DESIGNER',
-		'REACT SPECIALIST',
-		'STRATEGIC THINKER',
-		'FULL STACK ENGINEER',
-	]
+	const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+	const heroRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentSkill(prev => (prev + 1) % skills.length)
-		}, 2500)
+		const handleMouseMove = (e: MouseEvent) => {
+			if (heroRef.current) {
+				const rect = heroRef.current.getBoundingClientRect()
+				const centerX = rect.left + rect.width / 2
+				const centerY = rect.top + rect.height / 2
 
-		return () => clearInterval(interval)
-	}, [skills.length])
+				setMousePos({
+					x: (e.clientX - centerX) / 50, // Уменьшаем чувствительность
+					y: (e.clientY - centerY) / 50,
+				})
+			}
+		}
+
+		window.addEventListener('mousemove', handleMouseMove)
+		return () => window.removeEventListener('mousemove', handleMouseMove)
+	}, [])
 
 	return (
-		<div className='min-h-screen flex items-center justify-center bg-white'>
-			<div className='text-center'>
-				{/* Основное имя */}
-				<div className='relative'>
-					<div className='flex items-center justify-center mb-8'>
-						<h1 className='text-[12vw] md:text-[8rem] font-black leading-none tracking-tight text-black'>
-							YOUR
-						</h1>
-					</div>
-
-					<div className='flex items-center justify-center mb-16'>
-						<h1 className='text-[12vw] md:text-[8rem] font-black leading-none tracking-tight text-black'>
-							NAME
-						</h1>
-					</div>
+		<div
+			ref={heroRef}
+			className='min-h-screen bg-[#F4D03F] flex flex-col items-center justify-center relative overflow-hidden'
+		>
+			{/* Имя ALEXANDR */}
+			<div className='mb-4'>
+				<div className='flex items-center justify-center space-x-2 md:space-x-4'>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						A
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						L
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						E
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						X
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						A
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						N
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						D
+					</span>
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						R
+					</span>
 				</div>
+			</div>
 
-				{/* Анимированный текст навыков */}
-				<div className='h-16 flex items-center justify-center overflow-hidden'>
+			{/* Интерактивная бегущая строка */}
+			<div className='w-full overflow-hidden mb-4'>
+				<div className='bg-black text-white py-2 px-4 relative'>
+					<div className='marquee text-sm md:text-base font-medium uppercase tracking-wider'>
+						FRONTEND DEVELOPER • REACT SPECIALIST • TYPESCRIPT EXPERT • UI/UX
+						ENTHUSIAST • PROBLEM SOLVER • WEB DEVELOPER •
+					</div>
+					{/* Интерактивные точки */}
 					<div
-						className='rotating-text text-lg md:text-xl font-light uppercase tracking-widest text-gray-600'
-						key={currentSkill}
-					>
-						{skills[currentSkill]}
-					</div>
+						className='absolute top-1/2 left-1/4 w-2 h-2 bg-[#F4D03F] rounded-full transition-transform duration-300 ease-out'
+						style={{
+							transform: `translate(${mousePos.x * 2}px, ${
+								mousePos.y * 2 - 4
+							}px)`,
+						}}
+					/>
+					<div
+						className='absolute top-1/2 right-1/4 w-2 h-2 bg-[#F4D03F] rounded-full transition-transform duration-300 ease-out'
+						style={{
+							transform: `translate(${-mousePos.x * 2}px, ${
+								mousePos.y * 2 - 4
+							}px)`,
+						}}
+					/>
 				</div>
+			</div>
 
-				{/* Разделяющие точки */}
-				<div className='flex justify-center space-x-2 mt-8'>
-					<div className='w-1 h-1 bg-black rounded-full'></div>
-					<div className='w-1 h-1 bg-black rounded-full'></div>
-					<div className='w-1 h-1 bg-black rounded-full'></div>
+			{/* Фамилия OBRAZTSOV с интерактивными элементами */}
+			<div className='relative'>
+				<div className='flex items-center justify-center space-x-2 md:space-x-4'>
+					{/* Интерактивный круг слева */}
+					<div className='relative'>
+						<div className='logo-oval w-16 h-full md:w-24 md:h-14 lg:w-28 lg:h-16'>
+							<div
+								className='logo-circle w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 transition-transform duration-300 ease-out'
+								style={{
+									transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
+								}}
+							/>
+						</div>
+					</div>
+
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						BRAZTS
+					</span>
+
+					{/* Интерактивный круг справа */}
+					<div className='relative'>
+						<div className='logo-oval w-16 h-10 md:w-24 md:h-14 lg:w-28 lg:h-16'>
+							<div
+								className='logo-circle w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 transition-transform duration-300 ease-out'
+								style={{
+									transform: `translate(${-mousePos.x}px, ${mousePos.y}px)`,
+								}}
+							/>
+						</div>
+					</div>
+
+					<span className='text-[4rem] md:text-[8rem] lg:text-[10rem] font-black text-black leading-none'>
+						V
+					</span>
 				</div>
 			</div>
 		</div>
