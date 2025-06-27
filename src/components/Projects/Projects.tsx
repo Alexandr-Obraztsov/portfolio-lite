@@ -7,6 +7,11 @@ import { ExternalLink, Github } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import dotnews from '../../assets/images/dotnews.png'
+import debator from '../../assets/images/debator.png'
+import macPortfolio from '../../assets/images/mac-portfolio.png'
+import inctagram from '../../assets/images/inctagram.png'
+import circuitDesigner from '../../assets/images/circuit-designer.png'
+
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
@@ -17,40 +22,42 @@ const projects = [
 		id: 1,
 		title: '.news',
 		description: 'Telegram Mini App for summarizing news from the channel',
-		tech: ['React', 'TypeScript', 'Tailwind', 'Telegram Bot API'],
+		tech: ['React', 'TypeScript', 'Tailwind', 'Telegram Bot API', 'RTK Query'],
 		image: dotnews,
 		live: 'https://t.me/dnwsbot',
 	},
 	{
 		id: 2,
-		title: 'Task Management App',
-		description: 'Collaborative project management tool with real-time updates',
-		tech: ['React', 'Firebase', 'Material-UI'],
-		image:
-			'https://www.it-academy.by/upload/medialibrary/3d6/whb8nryp2va2vb57i3bsglq5pp15wjxw.png',
-		github: 'https://github.com',
-		live: 'https://example.com',
+		title: 'Debator',
+		description: 'Debator is a platform for creating and managing debates',
+		tech: ['React', 'TypeScript', 'Tailwind', 'RTK Query', 'i18n'],
+		image: debator,
 	},
 	{
 		id: 3,
-		title: 'Weather Dashboard',
-		description: 'Beautiful weather app with location-based forecasts',
-		tech: ['React', 'API Integration', 'CSS3'],
-		image:
-			'https://media.licdn.com/dms/image/v2/D4D12AQFtdAY6ehT7Lg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1694870890113?e=2147483647&v=beta&t=pTAkbM24u9MBbf1WVmIV3f8ckFR3daaTLR5kVKGoUwM',
-		github: 'https://github.com',
-		live: 'https://example.com',
+		title: 'Mac Portfolio',
+		description: 'Mac Portfolio is a portfolio website for a Mac developer',
+		tech: ['NextJS', 'TypeScript', 'Tailwind', 'Swiper', 'NodeJS'],
+		image: macPortfolio,
+		github: 'https://github.com/Alexandr-Obraztsov/mac-portfolio',
+		live: 'https://portfolio-tau-gray-80.vercel.app/',
 	},
 	{
 		id: 4,
-		title: 'Portfolio Website',
+		title: 'Inctagram',
 		description:
-			'Personal portfolio with modern animations and responsive design',
-		tech: ['React', 'Framer Motion', 'Tailwind'],
-		image:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROgl51eBJOJmK0mJd-KHwEtSmIZNyNDPaM7A&s',
-		github: 'https://github.com',
-		live: 'https://example.com',
+			'Instagram clone on NextJS with localization and authentication (internship project)',
+		tech: ['NextJS', 'TypeScript', 'Tailwind', 'Shadcn UI', 'i18n', 'oAuth'],
+		image: inctagram,
+		github: 'https://github.com/Alexandr-Obraztsov/Inctagram',
+	},
+	{
+		id: 5,
+		title: 'Circuit Designer',
+		description: 'Platform for designing and solving transition processes',
+		tech: ['React', 'TypeScript', 'Tailwind', 'RTK Query', 'Python', 'FastAPI'],
+		image: circuitDesigner,
+		github: 'https://github.com/Alexandr-Obraztsov/apec-frontend',
 	},
 ]
 
@@ -119,15 +126,14 @@ export function Projects() {
 					slidesPerView={1.2}
 					spaceBetween={0}
 					loop
+					autoHeight={false}
 					breakpoints={{
 						620: {
-							loop: false,
 							slidesPerView: 2.2,
 							spaceBetween: 0,
 						},
 						1200: {
 							slidesPerView: 3,
-							loop: false,
 						},
 						1600: {
 							slidesPerView: 4,
@@ -136,26 +142,23 @@ export function Projects() {
 					}}
 				>
 					{projects.map((project, index) => (
-						<SwiperSlide key={project.id} className='h-full!'>
+						<SwiperSlide key={project.id}>
 							<motion.div
-								className='bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-black/10 transition-all duration-300'
+								className='h-full! bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-black/10 transition-all duration-300 flex flex-col'
 								initial={{ opacity: 0, y: 50 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 1.2 + index * 0.2 }}
 								whileHover={{ scale: 1.02 }}
 							>
 								{/* Изображение проекта */}
-								<div className='relative overflow-hidden'>
-									<img
-										src={project.image}
-										alt={project.title}
-										className='w-full h-full object-cover'
-									/>
-									<div className='absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-								</div>
+								<img
+									src={project.image}
+									alt={project.title}
+									className='w-full object-cover object-center'
+								/>
 
 								{/* Контент */}
-								<div className='p-6!'>
+								<div className='p-6! flex flex-col grow'>
 									<h3 className='text-xl font-bold text-black mb-2!'>
 										{project.title}
 									</h3>
@@ -176,7 +179,7 @@ export function Projects() {
 									</div>
 
 									{/* Ссылки */}
-									<div className='flex gap-4!'>
+									<div className='flex gap-4! mt-auto!'>
 										{project.github && (
 											<motion.a
 												href={project.github}
@@ -188,15 +191,17 @@ export function Projects() {
 												<span className='text-sm font-medium'>Code</span>
 											</motion.a>
 										)}
-										<motion.a
-											href={project.live}
-											className='flex items-center gap-2! text-black hover:text-accent transition-colors'
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-										>
-											<ExternalLink size={18} />
-											<span className='text-sm font-medium'>Live</span>
-										</motion.a>
+										{project.live && (
+											<motion.a
+												href={project.live}
+												className='flex items-center gap-2! text-black hover:text-accent transition-colors'
+												whileHover={{ scale: 1.05 }}
+												whileTap={{ scale: 0.95 }}
+											>
+												<ExternalLink size={18} />
+												<span className='text-sm font-medium'>Live</span>
+											</motion.a>
+										)}
 									</div>
 								</div>
 							</motion.div>
