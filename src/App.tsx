@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { SectorContext, type SectorType } from './models/SectorContext'
 import { Home } from './components/Home/Home'
 import { Contact } from './components/Contact/Contact'
+import { About } from './components/About/About'
 
 const sectors = {
 	home: {
@@ -18,6 +19,10 @@ const sectors = {
 	contact: {
 		id: 'contact',
 		component: <Contact />,
+	},
+	about: {
+		id: 'about',
+		component: <About />,
 	},
 }
 
