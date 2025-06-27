@@ -1,13 +1,7 @@
 import { motion } from 'framer-motion'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { ExternalLink, Github } from 'lucide-react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay } from 'swiper/modules'
 
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import './Projects.styles.css'
 import { projects } from '../../const/projects'
 
 export function Projects() {
@@ -53,106 +47,68 @@ export function Projects() {
 				</motion.p>
 			</motion.div>
 
-			{/* Swiper с проектами */}
-			<div className='w-full'>
-				<Swiper
-					modules={[Autoplay]}
-					autoplay={{
-						delay: 5000,
-						disableOnInteraction: true,
-						pauseOnMouseEnter: true,
-					}}
-					grabCursor={true}
-					centeredSlides={true}
-					slidesPerView={1}
-					spaceBetween={0}
-					loop
-					autoHeight={false}
-					breakpoints={{
-						620: {
-							slidesPerView: 2,
-							spaceBetween: 8,
-						},
-						1200: {
-							slidesPerView: 3,
-							spaceBetween: 12,
-						},
-						1600: {
-							slidesPerView: 4,
-							spaceBetween: 16,
-							loop: false,
-						},
-					}}
-					lazyPreloadPrevNext={1}
-				>
-					{projects.map((project, index) => (
-						<SwiperSlide key={project.id}>
-							<motion.div
-								className='h-full! bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-black/10 transition-all duration-300 flex flex-col'
-								initial={{ opacity: 0, y: 50 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-								whileHover={{ scale: 1.02 }}
-							>
-								{/* Изображение проекта */}
-								<img
-									src={project.image}
-									alt={project.title}
-									loading='lazy'
-									className='w-full object-cover object-center'
-								/>
-
-								{/* Контент */}
-								<div className='p-6! flex flex-col grow'>
-									<h3 className='text-xl font-bold text-black mb-2!'>
-										{project.title}
-									</h3>
-									<p className='text-black/70 font-light mb-4! leading-relaxed'>
-										{project.description}
-									</p>
-
-									{/* Технологии */}
-									<div className='flex flex-wrap gap-2! mb-4!'>
-										{project.tech.map((tech, techIndex) => (
-											<span
-												key={techIndex}
-												className='px-3! py-1! bg-black/10 text-black text-xs font-medium rounded-full'
-											>
-												{tech}
-											</span>
-										))}
-									</div>
-
-									{/* Ссылки */}
-									<div className='flex gap-4! mt-auto!'>
-										{project.github && (
-											<motion.a
-												href={project.github}
-												className='flex items-center gap-2! text-black hover:text-accent transition-colors'
-												whileHover={{ scale: 1.05 }}
-												whileTap={{ scale: 0.95 }}
-											>
-												<Github size={18} />
-												<span className='text-sm font-medium'>Code</span>
-											</motion.a>
-										)}
-										{project.live && (
-											<motion.a
-												href={project.live}
-												className='flex items-center gap-2! text-black hover:text-accent transition-colors'
-												whileHover={{ scale: 1.05 }}
-												whileTap={{ scale: 0.95 }}
-											>
-												<ExternalLink size={18} />
-												<span className='text-sm font-medium'>Live</span>
-											</motion.a>
-										)}
-									</div>
+			{/* Проекты: горизонтальный скролл */}
+			<div className='w-full overflow-x-auto scrollbar-thin scrollbar-thumb-black/20 scrollbar-track-transparent'>
+				<div className='flex gap-6 snap-x snap-mandatory px-4'>
+					{projects.map(project => (
+						<div
+							key={project.id}
+							className='flex-shrink-0 w-4/5 xs:w-3/4 sm:w-1/2 lg:w-1/3 snap-start bg-[#d4a14e] rounded-2xl overflow-hidden flex flex-col'
+						>
+							{/* Изображение проекта */}
+							<img
+								src={project.image}
+								alt={project.title}
+								className='w-full h-60 object-cover object-center'
+							/>
+							{/* Контент */}
+							<div className='p-6 flex flex-col grow'>
+								<h3 className='text-xl font-bold text-black mb-2'>
+									{project.title}
+								</h3>
+								<p className='text-black/70 font-light mb-4 leading-relaxed'>
+									{project.description}
+								</p>
+								{/* Технологии */}
+								<div className='flex flex-wrap gap-2 mb-4'>
+									{project.tech.map((tech, techIndex) => (
+										<span
+											key={techIndex}
+											className='px-3 py-1 bg-black/10 text-black text-xs font-medium rounded-full'
+										>
+											{tech}
+										</span>
+									))}
 								</div>
-							</motion.div>
-						</SwiperSlide>
+								{/* Ссылки */}
+								<div className='flex gap-4 mt-auto'>
+									{project.github && (
+										<motion.a
+											href={project.github}
+											className='flex items-center gap-2 text-black hover:text-accent transition-colors'
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+										>
+											<Github size={18} />
+											<span className='text-sm font-medium'>Code</span>
+										</motion.a>
+									)}
+									{project.live && (
+										<motion.a
+											href={project.live}
+											className='flex items-center gap-2 text-black hover:text-accent transition-colors'
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+										>
+											<ExternalLink size={18} />
+											<span className='text-sm font-medium'>Live</span>
+										</motion.a>
+									)}
+								</div>
+							</div>
+						</div>
 					))}
-				</Swiper>
+				</div>
 			</div>
 		</SwipeContainer>
 	)
