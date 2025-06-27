@@ -63,9 +63,9 @@ export default function Menu() {
 				{menuItems.map((item, index) => (
 					<motion.div
 						key={item.id}
-						className='flex items-center justify-center gap-4 cursor-pointer group text-[3rem] md:text-[4rem] lg:text-[5rem] hover:bg-white/60  transition-all ease-in-out duration-300 p-2!'
-						initial={{ opacity: 0, y: -20 * index }}
-						animate={{ opacity: 1, y: 0 }}
+						className='flex items-center justify-center gap-4 cursor-pointer group text-[3rem] md:text-[4rem] lg:text-[5rem] hover:bg-white/60  transition-all ease-in-out not-hover:duration-700 p-2!'
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
 						transition={{ duration: 0.5, delay: 0.3 * index }}
 						onClick={() => handleMenuClick(item.id)}
 					>
