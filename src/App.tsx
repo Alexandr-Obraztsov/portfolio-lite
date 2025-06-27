@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 
 import Menu from './components/Menu/Menu'
 import { Home } from './components/Home/Home'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { HashRouter, Route, Routes } from 'react-router'
 import { PATHS } from './const/PATHS'
 import { lazy } from 'react'
 
@@ -27,7 +27,7 @@ const LazyProjects = lazy(() =>
 function App() {
 	return (
 		<AnimatePresence mode='wait'>
-			<BrowserRouter>
+			<HashRouter>
 				<Routes>
 					<Route path={PATHS.home} element={<Home />} />
 					<Route path={PATHS.menu} element={<Menu />} />
@@ -35,7 +35,7 @@ function App() {
 					<Route path={PATHS.about} element={<LazyAbout />} />
 					<Route path={PATHS.projects} element={<LazyProjects />} />
 				</Routes>
-			</BrowserRouter>
+			</HashRouter>
 		</AnimatePresence>
 	)
 }

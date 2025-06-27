@@ -4,11 +4,6 @@
 	transition: scale 0.3s ease-in-out;
 }
 
-.swiper-slide-prev,
-.swiper-slide-next {
-	scale: 0.95;
-}
-
 .swiper-slide-active {
 	scale: 1;
 }
