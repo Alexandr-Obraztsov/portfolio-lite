@@ -1,15 +1,15 @@
-import { useContext } from 'react'
 import { motion } from 'framer-motion'
-import { SectorContext } from '../../models/SectorContext'
 import { User, Code, Mail } from 'lucide-react'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
+import { useNavigate } from 'react-router'
+import { PATHS } from '../../const/PATHS'
 
 export default function Menu() {
-	const { setCurrentSector } = useContext(SectorContext)
+	const navigate = useNavigate()
 
 	const handleSwipeUp = () => {
-		setCurrentSector('home')
+		navigate(PATHS.home)
 	}
 
 	const menuItems = [
@@ -30,16 +30,8 @@ export default function Menu() {
 		},
 	]
 
-	const handleMenuClick = (itemId: string) => {
-		if (itemId === 'contact') {
-			setCurrentSector('contact')
-		}
-		if (itemId === 'about') {
-			setCurrentSector('about')
-		}
-		if (itemId === 'projects') {
-			setCurrentSector('projects')
-		}
+	const handleMenuClick = (itemId: keyof typeof PATHS) => {
+		navigate(PATHS[itemId])
 	}
 
 	return (
@@ -72,7 +64,7 @@ export default function Menu() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.5, delay: 0.3 * index }}
-						onClick={() => handleMenuClick(item.id)}
+						onClick={() => handleMenuClick(item.id as keyof typeof PATHS)}
 					>
 						<div className='text-black transition-transform'>{item.icon}</div>
 						<span className='font-black text-black transition-all leading-none'>

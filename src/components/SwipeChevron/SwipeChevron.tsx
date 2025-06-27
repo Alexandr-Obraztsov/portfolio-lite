@@ -1,16 +1,14 @@
 import { motion } from 'framer-motion'
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
-import { useContext } from 'react'
-import { SectorContext, type SectorType } from '../../models/SectorContext'
+import { PATHS } from '../../const/PATHS'
+import { Link } from 'react-router'
 
 interface SwipeChevronProps {
-	sector: SectorType
+	sector: keyof typeof PATHS
 	direction: 'up' | 'down'
 }
 
 export const SwipeChevron = ({ sector, direction }: SwipeChevronProps) => {
-	const { setCurrentSector } = useContext(SectorContext)
-
 	return (
 		<motion.div
 			className={`absolute ${
@@ -19,11 +17,11 @@ export const SwipeChevron = ({ sector, direction }: SwipeChevronProps) => {
 			animate={{ y: [0, 10, 0] }}
 			transition={{ repeat: Infinity, duration: 2 }}
 		>
-			<div
+			<Link
 				className={`flex items-center text-black/90 cursor-pointer ${
 					direction === 'down' ? 'flex-col' : 'flex-col-reverse'
 				}`}
-				onClick={() => setCurrentSector(sector)}
+				to={PATHS[sector]}
 			>
 				<span
 					className='font-bold uppercase
@@ -37,7 +35,7 @@ export const SwipeChevron = ({ sector, direction }: SwipeChevronProps) => {
 				) : (
 					<ChevronUpIcon className='size-6 sm:size-8' />
 				)}
-			</div>
+			</Link>
 		</motion.div>
 	)
 }

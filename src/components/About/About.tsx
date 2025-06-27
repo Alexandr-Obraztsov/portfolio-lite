@@ -1,17 +1,17 @@
-import { useContext } from 'react'
 import { motion } from 'framer-motion'
-import { SectorContext } from '../../models/SectorContext'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { AnimatedTitle } from './AnimatedTitle'
 import { StoryCard } from './StoryCard'
 import { SkillsSection } from './SkillsSection'
+import { useNavigate } from 'react-router'
+import { PATHS } from '../../const/PATHS'
 
 export function About() {
-	const { setCurrentSector } = useContext(SectorContext)
+	const navigate = useNavigate()
 
 	const handleSwipeUp = () => {
-		setCurrentSector('menu')
+		navigate(PATHS.menu)
 	}
 
 	return (

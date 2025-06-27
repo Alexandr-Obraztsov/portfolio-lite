@@ -1,14 +1,14 @@
-import { useContext } from 'react'
 import { motion } from 'framer-motion'
-import { SectorContext } from '../../models/SectorContext'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
+import { useNavigate } from 'react-router'
+import { PATHS } from '../../const/PATHS'
 
 export function Home() {
-	const { setCurrentSector } = useContext(SectorContext)
+	const navigate = useNavigate()
 
 	const handleSwipeDown = () => {
-		setCurrentSector('menu')
+		navigate(PATHS.menu)
 	}
 
 	return (

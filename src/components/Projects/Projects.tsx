@@ -1,71 +1,23 @@
-import { useContext } from 'react'
 import { motion } from 'framer-motion'
-import { SectorContext } from '../../models/SectorContext'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { ExternalLink, Github } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import dotnews from '../../assets/images/dotnews.png'
-import debator from '../../assets/images/debator.png'
-import macPortfolio from '../../assets/images/mac-portfolio.png'
-import inctagram from '../../assets/images/inctagram.png'
-import circuitDesigner from '../../assets/images/circuit-designer.png'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import './Projects.styles.css'
-
-const projects = [
-	{
-		id: 1,
-		title: '.news',
-		description: 'Telegram Mini App for summarizing news from the channel',
-		tech: ['React', 'TypeScript', 'Tailwind', 'Telegram Bot API', 'RTK Query'],
-		image: dotnews,
-		live: 'https://t.me/dnwsbot',
-	},
-	{
-		id: 2,
-		title: 'Debator',
-		description: 'Debator is a platform for creating and managing debates',
-		tech: ['React', 'TypeScript', 'Tailwind', 'RTK Query', 'i18n'],
-		image: debator,
-	},
-	{
-		id: 3,
-		title: 'Mac Portfolio',
-		description: 'Mac Portfolio is a portfolio website for a Mac developer',
-		tech: ['NextJS', 'TypeScript', 'Tailwind', 'Swiper', 'NodeJS'],
-		image: macPortfolio,
-		github: 'https://github.com/Alexandr-Obraztsov/mac-portfolio',
-		live: 'https://portfolio-tau-gray-80.vercel.app/',
-	},
-	{
-		id: 4,
-		title: 'Inctagram',
-		description:
-			'Instagram clone on NextJS with localization and authentication (internship project)',
-		tech: ['NextJS', 'TypeScript', 'Tailwind', 'Shadcn UI', 'i18n', 'oAuth'],
-		image: inctagram,
-		github: 'https://github.com/Alexandr-Obraztsov/Inctagram',
-	},
-	{
-		id: 5,
-		title: 'Circuit Designer',
-		description: 'Platform for designing and solving transition processes',
-		tech: ['React', 'TypeScript', 'Tailwind', 'RTK Query', 'Python', 'FastAPI'],
-		image: circuitDesigner,
-		github: 'https://github.com/Alexandr-Obraztsov/apec-frontend',
-	},
-]
+import { useNavigate } from 'react-router'
+import { PATHS } from '../../const/PATHS'
+import { projects } from '../../const/Projects'
 
 export function Projects() {
-	const { setCurrentSector } = useContext(SectorContext)
+	const navigate = useNavigate()
 
 	const handleSwipeUp = () => {
-		setCurrentSector('menu')
+		navigate(PATHS.menu)
 	}
 
 	return (

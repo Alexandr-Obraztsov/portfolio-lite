@@ -1,16 +1,16 @@
-import { useContext } from 'react'
-import { SectorContext } from '../../models/SectorContext'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { ContactTitle } from './ContactTitle'
 import { ContactSubtitle } from './ContactSubtitle'
 import { ContactForm } from './ContactForm'
+import { useNavigate } from 'react-router'
+import { PATHS } from '../../const/PATHS'
 
 export function Contact() {
-	const { setCurrentSector } = useContext(SectorContext)
+	const navigate = useNavigate()
 
 	const handleSwipeUp = () => {
-		setCurrentSector('menu')
+		navigate(PATHS.menu)
 	}
 
 	return (
