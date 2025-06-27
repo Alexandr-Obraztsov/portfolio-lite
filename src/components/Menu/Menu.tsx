@@ -36,7 +36,7 @@ export default function Menu() {
 
 	return (
 		<SwipeContainer
-			className='min-h-screen bg-accent flex flex-col items-center justify-center relative overflow-hidden'
+			className='max-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden'
 			onSwipeUp={handleSwipeUp}
 		>
 			{/* Заголовок MENU */}
@@ -61,9 +61,9 @@ export default function Menu() {
 					<motion.button
 						key={item.id}
 						className='flex items-center justify-center gap-4 cursor-pointer group text-[2.5rem] xs:text-[3rem] md:text-[4rem] lg:text-[5rem] hover:bg-white/60  transition-all ease-in-out not-hover:duration-700 p-2!'
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.5, delay: 0.3 * index }}
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.2, delay: 0.3 * index }}
 						onClick={() => handleMenuClick(item.id as keyof typeof PATHS)}
 					>
 						<div className='text-black transition-transform'>{item.icon}</div>

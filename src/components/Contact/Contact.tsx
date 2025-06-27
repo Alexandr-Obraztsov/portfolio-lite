@@ -15,7 +15,7 @@ export function Contact() {
 
 	return (
 		<SwipeContainer
-			className='min-h-screen bg-accent flex flex-col items-center justify-center relative overflow-hidden px-6!'
+			className='min-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden px-6!'
 			onSwipeUp={handleSwipeUp}
 		>
 			<ContactTitle />

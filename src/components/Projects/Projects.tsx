@@ -11,7 +11,7 @@ import 'swiper/css/navigation'
 import './Projects.styles.css'
 import { useNavigate } from 'react-router'
 import { PATHS } from '../../const/PATHS'
-import { projects } from '../../const/Projects'
+import { projects } from '../../const/projects'
 
 export function Projects() {
 	const navigate = useNavigate()
@@ -22,7 +22,7 @@ export function Projects() {
 
 	return (
 		<SwipeContainer
-			className='min-h-screen bg-accent flex flex-col items-center justify-center relative overflow-hidden'
+			className='min-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden'
 			onSwipeUp={handleSwipeUp}
 		>
 			{/* Заголовок */}
