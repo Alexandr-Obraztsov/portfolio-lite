@@ -29,7 +29,7 @@ export function AnimatedTitle() {
 
 			{/* Подзаголовок с пишущей машинкой */}
 			<motion.div
-				className='mt-4 text-[1rem] md:text-[1.2rem] font-light text-black/70'
+				className='mt-4 text-[1rem] md:text-[1.2rem] font-light'
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.8 }}
@@ -38,9 +38,9 @@ export function AnimatedTitle() {
 					initial={{ width: 0 }}
 					animate={{ width: 'auto' }}
 					transition={{ duration: 2, delay: 1 }}
-					className='inline-block overflow-hidden whitespace-nowrap border-r-2 border-black'
+					className='inline-block overflow-hidden whitespace-nowrap border-r-2 border-black font-bold text-black uppercase'
 				>
-					Frontend Developer & Creative Problem Solver
+					Frontend Developer
 				</motion.span>
 			</motion.div>
 		</motion.div>

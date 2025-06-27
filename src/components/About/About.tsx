@@ -22,10 +22,9 @@ export function About() {
 			<AnimatedTitle />
 
 			{/* Основной контент */}
-			<div className='w-full max-w-6xl gap-12'>
+			<div className='w-full max-w-6xl mt-4!'>
 				{/* Левая колонка - О себе */}
 				<motion.div
-					className='space-y-8'
 					initial={{ opacity: 0, x: -50 }}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.6, delay: 1.2 }}

@@ -26,7 +26,7 @@ const timelineData = [
 export function StoryCard() {
 	return (
 		<motion.div
-			className='p-8! relative'
+			className='p-4! relative'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.6, delay: 1.2 }}
