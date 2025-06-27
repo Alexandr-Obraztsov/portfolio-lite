@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import 'tailwindcss';
 
+@theme {
+	--color-accent: #f4a63f;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -13,7 +17,7 @@ html {
 
 body {
 	font-family: 'Inter', sans-serif;
-	background-color: #f4d03f;
+	background-color: var(--color-accent);
 	color: #000000;
 	line-height: 1.6;
 	overflow-x: hidden;
@@ -32,4 +36,8 @@ body {
 .marquee {
 	animation: marquee 20s linear infinite;
 	white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+	display: none;
 }

@@ -1,10 +1,30 @@
-import Hero from './components/Hero/Hero'
+import { AnimatePresence } from 'framer-motion'
+
+import Menu from './components/Menu/Menu'
+import { useState } from 'react'
+import { SectorContext, type SectorType } from './models/SectorContext'
+import { Home } from './components/Home/Home'
+
+const sectors = {
+	home: {
+		id: 'home',
+		component: <Home />,
+	},
+	menu: {
+		id: 'menu',
+		component: <Menu />,
+	},
+}
 
 function App() {
+	const [currentSector, setCurrentSector] = useState<SectorType>('home')
+
 	return (
-		<div className='min-h-screen bg-[#F4D03F] text-black'>
-			<Hero />
-		</div>
+		<SectorContext.Provider value={{ currentSector, setCurrentSector }}>
+			<AnimatePresence mode='wait'>
+				{sectors[currentSector].component}
+			</AnimatePresence>
+		</SectorContext.Provider>
 	)
 }
 
