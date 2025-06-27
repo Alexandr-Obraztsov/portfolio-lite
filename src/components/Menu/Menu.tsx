@@ -2,15 +2,11 @@ import { motion } from 'framer-motion'
 import { User, Code, Mail } from 'lucide-react'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
-import { useNavigate } from 'react-router'
 import { PATHS } from '../../const/PATHS'
+import { useNavigate } from 'react-router'
 
 export default function Menu() {
 	const navigate = useNavigate()
-
-	const handleSwipeUp = () => {
-		navigate(PATHS.home)
-	}
 
 	const menuItems = [
 		{
@@ -30,14 +26,10 @@ export default function Menu() {
 		},
 	]
 
-	const handleMenuClick = (itemId: keyof typeof PATHS) => {
-		navigate(PATHS[itemId])
-	}
-
 	return (
 		<SwipeContainer
-			className='max-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden'
-			onSwipeUp={handleSwipeUp}
+			className='min-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden'
+			upSection={'home'}
 		>
 			{/* Заголовок MENU */}
 			<motion.div
@@ -64,7 +56,7 @@ export default function Menu() {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.2, delay: 0.3 * index }}
-						onClick={() => handleMenuClick(item.id as keyof typeof PATHS)}
+						onClick={() => navigate(PATHS[item.id as keyof typeof PATHS])}
 					>
 						<div className='text-black transition-transform'>{item.icon}</div>
 						<span className='font-black text-black transition-all leading-none'>

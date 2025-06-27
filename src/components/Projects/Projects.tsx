@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
-import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { ExternalLink, Github } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
@@ -9,22 +8,11 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import './Projects.styles.css'
-import { useNavigate } from 'react-router'
-import { PATHS } from '../../const/PATHS'
 import { projects } from '../../const/projects'
 
 export function Projects() {
-	const navigate = useNavigate()
-
-	const handleSwipeUp = () => {
-		navigate(PATHS.menu)
-	}
-
 	return (
-		<SwipeContainer
-			className='min-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden'
-			onSwipeUp={handleSwipeUp}
-		>
+		<SwipeContainer upSection={'menu'}>
 			{/* Заголовок */}
 			<motion.div
 				className='text-center mb-4! md:mb-12!'
@@ -161,8 +149,6 @@ export function Projects() {
 					))}
 				</Swiper>
 			</div>
-
-			<SwipeChevron sector='menu' direction='up' />
 		</SwipeContainer>
 	)
 }

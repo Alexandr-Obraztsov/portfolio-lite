@@ -1,24 +1,12 @@
 import { motion } from 'framer-motion'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
-import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { AnimatedTitle } from './AnimatedTitle'
 import { StoryCard } from './StoryCard'
 import { SkillsSection } from './SkillsSection'
-import { useNavigate } from 'react-router'
-import { PATHS } from '../../const/PATHS'
 
 export function About() {
-	const navigate = useNavigate()
-
-	const handleSwipeUp = () => {
-		navigate(PATHS.menu)
-	}
-
 	return (
-		<SwipeContainer
-			className='min-h-svh bg-accent flex flex-col items-center justify-center relative overflow-hidden px-6'
-			onSwipeUp={handleSwipeUp}
-		>
+		<SwipeContainer upSection={'menu'}>
 			<AnimatedTitle />
 
 			<div className='w-full max-w-6xl mt-4!'>
@@ -41,8 +29,6 @@ export function About() {
 					<SkillsSection />
 				</motion.div>
 			</div>
-
-			<SwipeChevron sector='menu' direction='up' />
 		</SwipeContainer>
 	)
 }

@@ -1,8 +1,8 @@
-import dotnews from '../assets/images/dotnews.png'
-import debator from '../assets/images/debator.png'
-import macPortfolio from '../assets/images/mac-portfolio.png'
-import inctagram from '../assets/images/inctagram.png'
-import circuitDesigner from '../assets/images/circuit-designer.png'
+import dotnews from '../assets/images/dotnews.webp'
+import debator from '../assets/images/debator.webp'
+import macPortfolio from '../assets/images/mac-portfolio.webp'
+import inctagram from '../assets/images/inctagram.webp'
+import circuitDesigner from '../assets/images/circuit-designer.webp'
 
 export const projects = [
 	{

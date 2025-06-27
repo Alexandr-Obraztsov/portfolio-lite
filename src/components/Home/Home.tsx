@@ -1,20 +1,11 @@
 import { motion } from 'framer-motion'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
-import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
-import { useNavigate } from 'react-router'
-import { PATHS } from '../../const/PATHS'
 
 export function Home() {
-	const navigate = useNavigate()
-
-	const handleSwipeDown = () => {
-		navigate(PATHS.menu)
-	}
-
 	return (
 		<SwipeContainer
-			className='h-svh flex flex-col items-center justify-center relative overflow-hidden'
-			onSwipeDown={handleSwipeDown}
+			className='min-h-svh flex flex-col items-center justify-center relative overflow-hidden'
+			downSection={'menu'}
 		>
 			<div className='inline-flex flex-col items-center justify-center relative overflow-hidden mx-auto'>
 				{/* Имя ALEXANDR */}
@@ -56,8 +47,6 @@ export function Home() {
 					OBRAZTSOV
 				</motion.span>
 			</div>
-
-			<SwipeChevron sector='menu' direction='down' />
 		</SwipeContainer>
 	)
 }
