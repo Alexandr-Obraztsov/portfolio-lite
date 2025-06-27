@@ -29,7 +29,7 @@ export function AnimatedTitle() {
 
 			{/* Подзаголовок с пишущей машинкой */}
 			<motion.div
-				className='mt-4 text-lg md:text-xl font-light text-black/70'
+				className='mt-4 text-[1rem] md:text-[1.2rem] font-light text-black/70'
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.8 }}

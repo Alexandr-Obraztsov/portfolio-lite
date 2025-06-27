@@ -5,19 +5,13 @@ import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { AnimatedTitle } from './AnimatedTitle'
 import { StoryCard } from './StoryCard'
-import { FunFacts } from './FunFacts'
 import { SkillsSection } from './SkillsSection'
-import { CTAButton } from './CTAButton'
 
 export function About() {
 	const { setCurrentSector } = useContext(SectorContext)
 
 	const handleSwipeUp = () => {
 		setCurrentSector('menu')
-	}
-
-	const handleContactClick = () => {
-		setCurrentSector('contact')
 	}
 
 	return (
@@ -28,7 +22,7 @@ export function About() {
 			<AnimatedTitle />
 
 			{/* Основной контент */}
-			<div className='w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12'>
+			<div className='w-full max-w-6xl gap-12'>
 				{/* Левая колонка - О себе */}
 				<motion.div
 					className='space-y-8'
@@ -37,7 +31,6 @@ export function About() {
 					transition={{ duration: 0.6, delay: 1.2 }}
 				>
 					<StoryCard />
-					<FunFacts />
 				</motion.div>
 
 				{/* Правая колонка - Навыки */}
@@ -50,8 +43,6 @@ export function About() {
 					<SkillsSection />
 				</motion.div>
 			</div>
-
-			<CTAButton onClick={handleContactClick} />
 
 			<SwipeChevron sector='menu' direction='up' />
 		</SwipeContainer>
