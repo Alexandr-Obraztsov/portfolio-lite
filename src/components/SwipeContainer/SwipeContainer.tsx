@@ -1,5 +1,5 @@
 import { motion, type PanInfo } from 'framer-motion'
-import { useEffect, type ReactNode } from 'react'
+import { useCallback, useEffect, type ReactNode } from 'react'
 
 interface SwipeContainerProps {
 	children: ReactNode
@@ -30,19 +30,22 @@ export default function SwipeContainer({
 		}
 	}
 
-	const handleScroll = (event: WheelEvent) => {
-		event.preventDefault()
-		const threshold = 50
+	const handleScroll = useCallback(
+		(event: WheelEvent) => {
+			event.preventDefault()
+			const threshold = 50
 
-		// Скролл вверх
-		if (event.deltaY < -threshold && onSwipeUp) {
-			onSwipeUp()
-		}
-		// Скролл вниз
-		else if (event.deltaY > threshold && onSwipeDown) {
-			onSwipeDown()
-		}
-	}
+			// Скролл вверх
+			if (event.deltaY < -threshold && onSwipeUp) {
+				onSwipeUp()
+			}
+			// Скролл вниз
+			else if (event.deltaY > threshold && onSwipeDown) {
+				onSwipeDown()
+			}
+		},
+		[onSwipeUp, onSwipeDown]
+	)
 
 	useEffect(() => {
 		const handleKeyDown = (event: Event) => {
@@ -68,7 +71,7 @@ export default function SwipeContainer({
 			window.removeEventListener('wheel', handleScroll)
 			window.removeEventListener('keydown', handleKeyDown)
 		}
-	}, [onSwipeUp, onSwipeDown])
+	}, [onSwipeUp, onSwipeDown, handleScroll])
 
 	return (
 		<motion.div

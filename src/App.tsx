@@ -4,6 +4,7 @@ import Menu from './components/Menu/Menu'
 import { useState } from 'react'
 import { SectorContext, type SectorType } from './models/SectorContext'
 import { Home } from './components/Home/Home'
+import { Contact } from './components/Contact/Contact'
 
 const sectors = {
 	home: {
@@ -13,6 +14,10 @@ const sectors = {
 	menu: {
 		id: 'menu',
 		component: <Menu />,
+	},
+	contact: {
+		id: 'contact',
+		component: <Contact />,
 	},
 }
 

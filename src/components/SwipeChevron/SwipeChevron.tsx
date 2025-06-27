@@ -14,7 +14,7 @@ export const SwipeChevron = ({ sector, direction }: SwipeChevronProps) => {
 	return (
 		<motion.div
 			className={`absolute ${
-				direction === 'down' ? 'bottom-20' : 'top-20'
+				direction === 'down' ? 'bottom-10 md:bottom-20' : 'top-10 md:top-20'
 			} left-1/2 transform -translate-x-1/2`}
 			animate={{ y: [0, 10, 0] }}
 			transition={{ repeat: Infinity, duration: 2 }}

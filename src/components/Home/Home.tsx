@@ -29,7 +29,7 @@ export function Home() {
 				</motion.div>
 
 				<div className='w-full h-12 sm:h-16 relative bg-black text-white overflow-hidden rounded-full flex items-center'>
-					<span className='absolute text-[1.5rem] sm:text-[2rem] font-bold marquee'>
+					<span className='absolute text-[1.5rem] sm:text-[2rem] font-light marquee'>
 						FRONTEND-DEVELOPER • REACT-SPECIALIST • TYPESCRIPT-EXPERT •
 						UI/UX-ENTHUSIAST • PROBLEM-SOLVER • WEB-DEVELOPER •
 						FRONTEND-DEVELOPER • REACT-SPECIALIST • TYPESCRIPT-EXPERT •

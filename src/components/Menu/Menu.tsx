@@ -30,6 +30,13 @@ export default function Menu() {
 		},
 	]
 
+	const handleMenuClick = (itemId: string) => {
+		if (itemId === 'contact') {
+			setCurrentSector('contact')
+		}
+		// Здесь можно добавить обработку других пунктов меню
+	}
+
 	return (
 		<SwipeContainer
 			className='min-h-screen bg-accent flex flex-col items-center justify-center relative overflow-hidden'
@@ -60,6 +67,7 @@ export default function Menu() {
 						initial={{ opacity: 0, y: -20 * index }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: 0.3 * index }}
+						onClick={() => handleMenuClick(item.id)}
 					>
 						<div className='text-black transition-transform'>{item.icon}</div>
 						<span className='font-black text-black transition-all leading-none'>
