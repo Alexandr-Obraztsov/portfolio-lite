@@ -27,14 +27,24 @@ export function Home() {
 					ALEXANDR
 				</motion.span>
 
-				<div className='w-full h-12 sm:h-16 relative bg-black text-white overflow-hidden rounded-full flex items-center'>
+				<motion.div
+					className='w-full [--h:2rem] sm:[--h:4rem] relative bg-black text-white overflow-hidden rounded-full flex items-center'
+					initial={{ opacity: 0, height: 0 }}
+					animate={{ opacity: 1, height: 'var(--h)' }}
+					transition={{
+						duration: 1,
+						delay: 0.6,
+						type: 'spring',
+						stiffness: 200,
+					}}
+				>
 					<span className='absolute text-[1.5rem] sm:text-[2rem] font-light marquee'>
 						FRONTEND-DEVELOPER • REACT-SPECIALIST • TYPESCRIPT-EXPERT •
 						UI/UX-ENTHUSIAST • PROBLEM-SOLVER • WEB-DEVELOPER •
 						FRONTEND-DEVELOPER • REACT-SPECIALIST • TYPESCRIPT-EXPERT •
 						UI/UX-ENTHUSIAST • PROBLEM-SOLVER • WEB-DEVELOPER •{' '}
 					</span>
-				</div>
+				</motion.div>
 
 				{/* Фамилия OBRAZTSOV с интерактивными элементами */}
 				<motion.span

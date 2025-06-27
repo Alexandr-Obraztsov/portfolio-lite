@@ -16,17 +16,17 @@ export default function Menu() {
 		{
 			id: 'about',
 			title: 'ABOUT',
-			icon: <User className='size-12 md:size-14 lg:size-16' />,
+			icon: <User className='size-10 xs:size-12 md:size-14 lg:size-16' />,
 		},
 		{
 			id: 'projects',
 			title: 'PROJECTS',
-			icon: <Code className='size-12 md:size-14 lg:size-16' />,
+			icon: <Code className='size-10 xs:size-12 md:size-14 lg:size-16' />,
 		},
 		{
 			id: 'contact',
 			title: 'CONTACT',
-			icon: <Mail className='size-12 md:size-14 lg:size-16' />,
+			icon: <Mail className='size-10 xs:size-12 md:size-14 lg:size-16' />,
 		},
 	]
 
@@ -41,7 +41,7 @@ export default function Menu() {
 		>
 			{/* Заголовок MENU */}
 			<motion.div
-				className='mb-16'
+				className='mb-8!'
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
@@ -60,7 +60,7 @@ export default function Menu() {
 				{menuItems.map((item, index) => (
 					<motion.button
 						key={item.id}
-						className='flex items-center justify-center gap-4 cursor-pointer group text-[3rem] md:text-[4rem] lg:text-[5rem] hover:bg-white/60  transition-all ease-in-out not-hover:duration-700 p-2!'
+						className='flex items-center justify-center gap-4 cursor-pointer group text-[2.5rem] xs:text-[3rem] md:text-[4rem] lg:text-[5rem] hover:bg-white/60  transition-all ease-in-out not-hover:duration-700 p-2!'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.5, delay: 0.3 * index }}

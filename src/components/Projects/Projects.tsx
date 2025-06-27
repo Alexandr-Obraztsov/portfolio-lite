@@ -32,7 +32,7 @@ export function Projects() {
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.5 }}
 			>
-				<div className='flex justify-center items-center text-[4rem] md:text-[6rem] lg:text-[8rem] font-black text-black leading-none'>
+				<div className='flex justify-center items-center text-[3.5rem] xs:text-[4rem] md:text-[6rem] lg:text-[8rem] font-black text-black leading-none'>
 					{['P', 'R', 'O', 'J', 'E', 'C', 'T', 'S'].map((letter, index) => (
 						<motion.span
 							key={index}
@@ -99,7 +99,7 @@ export function Projects() {
 								className='h-full! bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-black/10 transition-all duration-300 flex flex-col'
 								initial={{ opacity: 0, y: 50 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 1.2 + index * 0.2 }}
+								transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
 								whileHover={{ scale: 1.02 }}
 							>
 								{/* Изображение проекта */}

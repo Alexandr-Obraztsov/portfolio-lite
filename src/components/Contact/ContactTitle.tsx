@@ -23,12 +23,22 @@ export function ContactTitle() {
 				lg:text-[3.2rem] lg:[--initial-width:85px] lg:[--max-width:500px]'
 				initial={{ width: 'var(--initial-width)' }}
 				animate={{ width: 'var(--max-width)' }}
-				transition={{ duration: 0.5, ease: 'circOut', delay: 0.5 }}
+				transition={{
+					duration: 0.5,
+					type: 'spring',
+					stiffness: 200,
+					delay: 0.5,
+				}}
 			>
 				<motion.div
 					initial={{ y: '-200%' }}
 					animate={{ y: '0%' }}
-					transition={{ duration: 0.5, ease: 'backOut', delay: 1 }}
+					transition={{
+						duration: 0.5,
+						type: 'spring',
+						stiffness: 400,
+						delay: 1,
+					}}
 					className='relative'
 				>
 					HOW CAN I HELP?
