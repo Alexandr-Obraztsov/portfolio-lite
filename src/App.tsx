@@ -6,6 +6,7 @@ import { SectorContext, type SectorType } from './models/SectorContext'
 import { Home } from './components/Home/Home'
 import { Contact } from './components/Contact/Contact'
 import { About } from './components/About/About'
+import { Projects } from './components/Projects/Projects'
 
 const sectors = {
 	home: {
@@ -23,6 +24,10 @@ const sectors = {
 	about: {
 		id: 'about',
 		component: <About />,
+	},
+	projects: {
+		id: 'projects',
+		component: <Projects />,
 	},
 }
 

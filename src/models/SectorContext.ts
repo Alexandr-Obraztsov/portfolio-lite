@@ -1,6 +1,6 @@
 import { createContext, type Dispatch, type SetStateAction } from 'react'
 
-export type SectorType = 'home' | 'menu' | 'contact' | 'about'
+export type SectorType = 'home' | 'menu' | 'contact' | 'about' | 'projects'
 
 export interface SectorContextType {
 	currentSector: SectorType

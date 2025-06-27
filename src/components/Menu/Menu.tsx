@@ -37,7 +37,9 @@ export default function Menu() {
 		if (itemId === 'about') {
 			setCurrentSector('about')
 		}
-		// Здесь можно добавить обработку других пунктов меню
+		if (itemId === 'projects') {
+			setCurrentSector('projects')
+		}
 	}
 
 	return (

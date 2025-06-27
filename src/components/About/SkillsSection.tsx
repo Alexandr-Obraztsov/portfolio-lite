@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 const skills = [
 	{ name: 'React', level: 95 },
 	{ name: 'TypeScript', level: 90 },
-	{ name: 'CSS/Tailwind', level: 88 },
-	{ name: 'Node.js', level: 85 },
+	{ name: 'CSS/Tailwind', level: 95 },
+	{ name: 'NextJS', level: 85 },
 	{ name: 'UI/UX', level: 80 },
 	{ name: 'Problem Solving', level: 95 },
 ]
