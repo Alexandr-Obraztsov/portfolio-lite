@@ -60,26 +60,30 @@ export function Projects() {
 					autoplay={{
 						delay: 5000,
 						disableOnInteraction: true,
+						pauseOnMouseEnter: true,
 					}}
 					grabCursor={true}
 					centeredSlides={true}
-					slidesPerView={1.2}
+					slidesPerView={1}
 					spaceBetween={0}
 					loop
 					autoHeight={false}
 					breakpoints={{
 						620: {
-							slidesPerView: 2.2,
-							spaceBetween: 0,
+							slidesPerView: 2,
+							spaceBetween: 8,
 						},
 						1200: {
 							slidesPerView: 3,
+							spaceBetween: 12,
 						},
 						1600: {
 							slidesPerView: 4,
+							spaceBetween: 16,
 							loop: false,
 						},
 					}}
+					lazyPreloadPrevNext={1}
 				>
 					{projects.map((project, index) => (
 						<SwiperSlide key={project.id}>
@@ -94,6 +98,7 @@ export function Projects() {
 								<img
 									src={project.image}
 									alt={project.title}
+									loading='lazy'
 									className='w-full object-cover object-center'
 								/>
 
