@@ -6,6 +6,7 @@ import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { ExternalLink, Github } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
+import dotnews from '../../assets/images/dotnews.png'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
@@ -14,14 +15,11 @@ import './Projects.styles.css'
 const projects = [
 	{
 		id: 1,
-		title: 'E-Commerce Platform',
-		description:
-			'Modern online store with React, TypeScript and payment integration',
-		tech: ['React', 'TypeScript', 'Tailwind', 'Node.js'],
-		image:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9IloXN0mCCLJ6qscCTFh-kjYf8Orn6o9x2A&s',
-		github: 'https://github.com',
-		live: 'https://example.com',
+		title: '.news',
+		description: 'Telegram Mini App for summarizing news from the channel',
+		tech: ['React', 'TypeScript', 'Tailwind', 'Telegram Bot API'],
+		image: dotnews,
+		live: 'https://t.me/dnwsbot',
 	},
 	{
 		id: 2,
@@ -179,15 +177,17 @@ export function Projects() {
 
 									{/* Ссылки */}
 									<div className='flex gap-4!'>
-										<motion.a
-											href={project.github}
-											className='flex items-center gap-2! text-black hover:text-accent transition-colors'
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-										>
-											<Github size={18} />
-											<span className='text-sm font-medium'>Code</span>
-										</motion.a>
+										{project.github && (
+											<motion.a
+												href={project.github}
+												className='flex items-center gap-2! text-black hover:text-accent transition-colors'
+												whileHover={{ scale: 1.05 }}
+												whileTap={{ scale: 0.95 }}
+											>
+												<Github size={18} />
+												<span className='text-sm font-medium'>Code</span>
+											</motion.a>
+										)}
 										<motion.a
 											href={project.live}
 											className='flex items-center gap-2! text-black hover:text-accent transition-colors'

@@ -2,11 +2,6 @@ import { motion } from 'framer-motion'
 
 const timelineData = [
 	{
-		year: '2019',
-		title: 'Started Coding',
-		description: 'Fell in love with programming at 14',
-	},
-	{
 		year: '2022',
 		title: 'First Web Development',
 		description: 'Built personal websites and small apps',
@@ -17,7 +12,7 @@ const timelineData = [
 		description: 'Junior Frontend Developer at local company',
 	},
 	{
-		year: '2024',
+		year: '2025',
 		title: 'Full-time Job',
 		description: 'Frontend Developer, React specialist',
 	},

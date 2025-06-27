@@ -13,20 +13,19 @@ export function Home() {
 
 	return (
 		<SwipeContainer
-			className='min-h-screen bg-accent flex flex-col items-center justify-center relative overflow-hidden'
+			className='h-svh flex flex-col items-center justify-center relative overflow-hidden'
 			onSwipeDown={handleSwipeDown}
 		>
 			<div className='inline-flex flex-col items-center justify-center relative overflow-hidden mx-auto'>
 				{/* Имя ALEXANDR */}
-				<motion.div
+				<motion.span
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
+					className='text-[3rem] xs:text-[4rem] sm:text-[6rem] mb:text-[9rem] lg:text-[9rem] xl:text-[10rem] font-black text-black leading-none'
 				>
-					<span className='text-[3.5rem] sm:text-[6rem] lg:text-[9rem] xl:text-[10rem] font-black text-black leading-none'>
-						ALEXANDR
-					</span>
-				</motion.div>
+					ALEXANDR
+				</motion.span>
 
 				<div className='w-full h-12 sm:h-16 relative bg-black text-white overflow-hidden rounded-full flex items-center'>
 					<span className='absolute text-[1.5rem] sm:text-[2rem] font-light marquee'>
@@ -38,15 +37,14 @@ export function Home() {
 				</div>
 
 				{/* Фамилия OBRAZTSOV с интерактивными элементами */}
-				<motion.div
+				<motion.span
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
+					className='text-[3rem] xs:text-[4rem] sm:text-[6rem] mb:text-[9rem] lg:text-[9rem] xl:text-[10rem] font-black text-black leading-none'
 				>
-					<span className='text-[3.5rem] sm:text-[6rem] lg:text-[9rem] xl:text-[10rem] font-black text-black leading-none relative'>
-						OBRAZTSOV
-					</span>
-				</motion.div>
+					OBRAZTSOV
+				</motion.span>
 			</div>
 
 			<SwipeChevron sector='menu' direction='down' />

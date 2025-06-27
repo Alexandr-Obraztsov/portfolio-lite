@@ -66,7 +66,7 @@ export default function Menu() {
 				animate={{ opacity: 1, y: 0 }}
 			>
 				{menuItems.map((item, index) => (
-					<motion.div
+					<motion.button
 						key={item.id}
 						className='flex items-center justify-center gap-4 cursor-pointer group text-[3rem] md:text-[4rem] lg:text-[5rem] hover:bg-white/60  transition-all ease-in-out not-hover:duration-700 p-2!'
 						initial={{ opacity: 0 }}
@@ -78,7 +78,7 @@ export default function Menu() {
 						<span className='font-black text-black transition-all leading-none'>
 							{item.title}
 						</span>
-					</motion.div>
+					</motion.button>
 				))}
 			</motion.div>
 

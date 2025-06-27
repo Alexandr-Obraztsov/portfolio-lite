@@ -33,7 +33,7 @@ export default function SwipeContainer({
 	const handleScroll = useCallback(
 		(event: WheelEvent) => {
 			event.preventDefault()
-			const threshold = 10
+			const threshold = 50
 
 			// Скролл вверх
 			if (event.deltaY < -threshold && onSwipeUp) {

@@ -3,9 +3,12 @@
 
 @theme {
 	--color-accent: #f4a63f;
+	--breakpoint-xs: 420px;
 }
 
-* {
+*,
+*::before,
+*::after {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -20,7 +23,8 @@ body {
 	background-color: var(--color-accent);
 	color: #000000;
 	line-height: 1.6;
-	overflow-x: hidden;
+	margin: 0;
+	overflow: hidden;
 }
 
 /* Бегущая строка */
