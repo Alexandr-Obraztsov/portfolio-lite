@@ -29,7 +29,14 @@ app.post(
 			res.status(400).json({ error: 'Missing Bot Token or Chat ID' })
 		}
 
-		const text = `*New message from your portfolio:*\n\n*Name:*\n${name}\n\n*Email:*\n${email}\n\n*Message:*\n${message}`
+		const text =
+			`🌟 *Новое сообщение с портфолио!*\n\n` +
+			`👤 *Имя:* ${name}\n` +
+			`📧 *Email:* ${email}\n\n` +
+			`💬 *Сообщение:*\n${message}\n\n` +
+			`⏰ *Время:* ${new Date().toLocaleString('ru-RU', {
+				timeZone: 'Europe/Moscow',
+			})}`
 
 		const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`
 
@@ -41,12 +48,15 @@ app.post(
 			body: JSON.stringify({
 				chat_id: TELEGRAM_CHAT_ID,
 				text: text,
+				parse_mode: 'Markdown',
 			}),
 		})
 
-		const data = await response.json()
+		await response.json()
 
-		res.status(response.status).json(data)
+		res.status(response.status).json({
+			message: 'Message sent successfully',
+		})
 	}
 )
 
