@@ -1,5 +1,15 @@
 import { motion } from 'framer-motion'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
+import { Socials } from '../Socials/Socials'
+
+const associations = [
+	'FRONTEND-DEVELOPER',
+	'REACT-SPECIALIST',
+	'TYPESCRIPT-EXPERT',
+	'PROBLEM-SOLVER',
+	'WEB-DEVELOPER',
+	'VIBE-CODER',
+]
 
 export function Home() {
 	return (
@@ -7,6 +17,21 @@ export function Home() {
 			className='min-h-svh flex flex-col items-center justify-center relative overflow-hidden'
 			downSection={'menu'}
 		>
+			{/* Социальные сети */}
+			<motion.div
+				initial={{ opacity: 0, y: -40 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{
+					duration: 0.3,
+					delay: 1.8,
+					type: 'spring',
+					stiffness: 200,
+				}}
+				className='absolute top-5 flex justify-center w-full'
+			>
+				<Socials />
+			</motion.div>
+
 			<div className='inline-flex flex-col items-center justify-center relative overflow-hidden mx-auto'>
 				{/* Имя ALEXANDR */}
 				<motion.span
@@ -30,10 +55,10 @@ export function Home() {
 					}}
 				>
 					<span className='absolute text-[1.5rem] sm:text-[2rem] font-light marquee'>
-						FRONTEND-DEVELOPER • REACT-SPECIALIST • TYPESCRIPT-EXPERT •
-						UI/UX-ENTHUSIAST • PROBLEM-SOLVER • WEB-DEVELOPER •
-						FRONTEND-DEVELOPER • REACT-SPECIALIST • TYPESCRIPT-EXPERT •
-						UI/UX-ENTHUSIAST • PROBLEM-SOLVER • WEB-DEVELOPER •{' '}
+						{[...associations, ...associations].reduce(
+							(acc, curr) => acc + curr + '⠀×⠀',
+							''
+						)}
 					</span>
 				</motion.div>
 

@@ -5,6 +5,7 @@ import { Home } from './components/Home/Home'
 import { HashRouter, Route, Routes } from 'react-router'
 import { PATHS } from './const/PATHS'
 import { lazy } from 'react'
+import { ImagePreloader } from './components/ImagePreloader/ImagePreloader'
 
 const LazyContact = lazy(() =>
 	import('./components/Contact/Contact').then(module => ({
@@ -27,6 +28,7 @@ const LazyProjects = lazy(() =>
 function App() {
 	return (
 		<AnimatePresence mode='wait'>
+			<ImagePreloader />
 			<HashRouter>
 				<Routes>
 					<Route path={PATHS.home} element={<Home />} />

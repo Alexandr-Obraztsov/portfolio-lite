@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { User, Code, Mail } from 'lucide-react'
 import SwipeContainer from '../SwipeContainer/SwipeContainer'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
 import { PATHS } from '../../const/PATHS'
 import { useNavigate } from 'react-router'
+import { LuCode, LuMail, LuUser } from 'react-icons/lu'
 
 export default function Menu() {
 	const navigate = useNavigate()
@@ -12,17 +12,17 @@ export default function Menu() {
 		{
 			id: 'about',
 			title: 'ABOUT',
-			icon: <User className='size-10 xs:size-12 md:size-14 lg:size-16' />,
+			icon: <LuUser className='size-10 xs:size-12 md:size-14 lg:size-16' />,
 		},
 		{
 			id: 'projects',
 			title: 'PROJECTS',
-			icon: <Code className='size-10 xs:size-12 md:size-14 lg:size-16' />,
+			icon: <LuCode className='size-10 xs:size-12 md:size-14 lg:size-16' />,
 		},
 		{
 			id: 'contact',
 			title: 'CONTACT',
-			icon: <Mail className='size-10 xs:size-12 md:size-14 lg:size-16' />,
+			icon: <LuMail className='size-10 xs:size-12 md:size-14 lg:size-16' />,
 		},
 	]
 

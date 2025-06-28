@@ -4,24 +4,24 @@ const timelineData = [
 	{
 		year: '2022',
 		title: 'First Web Development',
-		description: 'Built personal websites and small apps',
+		description: 'Built personal websites for school',
 	},
 	{
 		year: '2024',
-		title: 'Started IT-INCUBATOR Curses',
-		description: 'Junior Frontend Developer at local company',
+		title: 'IT-INCUBATOR Courses and Internship',
+		description: 'Learning and practicing React, NextJS and other technologies',
 	},
 	{
-		year: '2025',
-		title: 'Full-time Job',
-		description: 'Frontend Developer, React specialist',
+		year: '2024-2025',
+		title: 'Project Work',
+		description: 'Development of a TMA for a local company',
 	},
 ]
 
-export function StoryCard() {
+export function Timeline() {
 	return (
 		<motion.div
-			className='p-4! relative'
+			className='p-4! pt-2! relative'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.6, delay: 1.2 }}

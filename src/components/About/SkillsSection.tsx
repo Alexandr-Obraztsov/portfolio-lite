@@ -14,9 +14,9 @@ export function SkillsSection() {
 	const circumference = 2 * Math.PI * radius
 
 	return (
-		<div className='px-3! space-y-4!'>
+		<div className='px-3!'>
 			<motion.h3
-				className='font-bold text-black mb-4! text-center uppercase
+				className='font-bold text-black mb-2! text-center uppercase
 				text-[2rem]
 				sm:text-[2.5rem]
 				md:text-[3rem]
@@ -30,7 +30,7 @@ export function SkillsSection() {
 			</motion.h3>
 
 			{/* Сетка кружков */}
-			<div className='grid grid-cols-3 sm:grid-cols-6'>
+			<div className='grid grid-cols-3 sm:grid-cols-6 gap-2'>
 				{skills.map((skill, index) => (
 					<motion.div
 						key={skill.name}

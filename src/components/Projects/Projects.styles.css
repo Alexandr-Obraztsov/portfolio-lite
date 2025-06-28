@@ -4,6 +4,22 @@
 	transition: scale 0.3s ease-in-out;
 }
 
+.swiper-slide-prev,
+.swiper-slide-next {
+	scale: 0.95;
+}
+
 .swiper-slide-active {
 	scale: 1;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.overflow-x-scroll::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.overflow-x-scroll {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }

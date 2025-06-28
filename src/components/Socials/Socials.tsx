@@ -1,20 +1,28 @@
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { FiGithub, FiLinkedin } from 'react-icons/fi'
+import { RiTelegram2Line } from 'react-icons/ri'
 
 const socialLinks = [
-	{ icon: <Github className='w-8 h-8' />, url: '#', label: 'GITHUB' },
-	{ icon: <Linkedin className='w-8 h-8' />, url: '#', label: 'LINKEDIN' },
-	{ icon: <Mail className='w-8 h-8' />, url: '#', label: 'EMAIL' },
+	{
+		icon: <FiGithub className='size-8 md:size-10 lg:size-12' />,
+		url: 'https://github.com/Alexandr-Obraztsov',
+		label: 'GITHUB',
+	},
+	{
+		icon: <FiLinkedin className='size-8 md:size-10 lg:size-12' />,
+		url: 'https://www.linkedin.com/in/obraztsov-alexandr-047369349/',
+		label: 'LINKEDIN',
+	},
+	{
+		icon: <RiTelegram2Line className='size-8 md:size-10 lg:size-12' />,
+		url: 'https://t.me/obraztsov_alexandr',
+		label: 'TELEGRAM',
+	},
 ]
 
 export const Socials = () => {
 	return (
-		<motion.div
-			className='flex items-center gap-4'
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.6, delay: 0.6 }}
-		>
+		<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
 			{socialLinks.map((link, index) => (
 				<motion.a
 					key={index}
@@ -27,6 +35,6 @@ export const Socials = () => {
 					{link.icon}
 				</motion.a>
 			))}
-		</motion.div>
+		</div>
 	)
 }

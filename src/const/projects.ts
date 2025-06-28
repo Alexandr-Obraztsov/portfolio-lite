@@ -4,6 +4,16 @@ import macPortfolio from '../assets/images/mac-portfolio.webp'
 import inctagram from '../assets/images/inctagram.webp'
 import circuitDesigner from '../assets/images/circuit-designer.webp'
 
+export type Project = {
+	id: number
+	title: string
+	description: string
+	tech: string[]
+	image: string
+	live?: string
+	github?: string
+}
+
 export const projects = [
 	{
 		id: 1,
