@@ -1,8 +1,9 @@
-import { motion, type PanInfo } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useCallback, useEffect, type ReactNode } from 'react'
 import { PATHS } from '../../const/PATHS'
 import { useNavigate } from 'react-router'
 import { SwipeChevron } from '../SwipeChevron/SwipeChevron'
+import { swipeHandler } from '../../lib/swipeHandler'
 
 interface SwipeContainerProps {
 	children: ReactNode
@@ -18,22 +19,6 @@ export default function SwipeContainer({
 	className = '',
 }: SwipeContainerProps) {
 	const navigate = useNavigate()
-
-	const handleSwipe = (
-		_event: MouseEvent | TouchEvent | PointerEvent,
-		info: PanInfo
-	) => {
-		const threshold = 50
-
-		// Свайп вверх
-		if (info.offset.y > threshold && upSection) {
-			navigate(PATHS[upSection])
-		}
-		// Свайп вниз
-		else if (info.offset.y < -threshold && downSection) {
-			navigate(PATHS[downSection])
-		}
-	}
 
 	const handleScroll = useCallback(
 		(event: WheelEvent) => {
@@ -90,7 +75,10 @@ export default function SwipeContainer({
 			drag='y'
 			dragConstraints={{ top: 0, bottom: 0 }}
 			dragElastic={0.2}
-			onDragEnd={handleSwipe}
+			onDragEnd={swipeHandler(
+				() => upSection && navigate(PATHS[upSection]),
+				() => downSection && navigate(PATHS[downSection])
+			)}
 			whileDrag={{ scale: 0.98 }}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}

@@ -13,6 +13,9 @@ export function ContactForm() {
 		email: '',
 		message: '',
 	})
+	const [isSending, setIsSending] = useState(false)
+	const [isSent, setIsSent] = useState(false)
+	const [error, setError] = useState<string | null>(null)
 
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -24,11 +27,44 @@ export function ContactForm() {
 		}))
 	}
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		// Здесь можно добавить логику отправки формы
-		console.log('Form submitted:', formData)
-		alert('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.')
+		setIsSending(true)
+		setError(null)
+
+		try {
+			const response = await fetch('/api/sendMessage', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			})
+
+			if (!response.ok) {
+				throw new Error('Network response was not ok')
+			}
+
+			setIsSent(true)
+			setFormData({ name: '', email: '', message: '' }) // Очистить форму
+		} catch (err) {
+			setError('Failed to send message. Please try again later.')
+			console.error(err)
+		} finally {
+			setIsSending(false)
+		}
+	}
+
+	if (isSent) {
+		return (
+			<motion.div
+				className='text-center text-white text-xl'
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+			>
+				Thank you! Your message has been sent.
+			</motion.div>
+		)
 	}
 
 	return (
@@ -90,19 +126,21 @@ export function ContactForm() {
 					/>
 				</motion.div>
 
-				{/* Кнопка отправки */}
+				{/* Кнопка отправки и сообщение об ошибке */}
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.9 }}
-					className='flex justify-center'
+					className='flex flex-col items-center gap-4!'
 				>
 					<button
 						type='submit'
-						className=' bg-black hover:bg-black/90 text-white border border-black hover:border-accent py-2! px-4! transition-all duration-300 flex items-center justify-center text-[1.2rem] font-light'
+						disabled={isSending}
+						className=' bg-black hover:bg-black/90 text-white border border-black hover:border-accent py-2! px-4! transition-all duration-300 flex items-center justify-center text-[1.2rem] font-light disabled:opacity-50 disabled:cursor-not-allowed'
 					>
-						SUBMIT
+						{isSending ? 'SENDING...' : 'SUBMIT'}
 					</button>
+					{error && <p className='text-red-500 text-sm'>{error}</p>}
 				</motion.div>
 			</form>
 		</motion.div>

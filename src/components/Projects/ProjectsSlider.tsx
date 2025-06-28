@@ -8,10 +8,14 @@ import './Projects.styles.css'
 import { projects } from '../../const/projects'
 import { ProjectCard } from './ProjectCard'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { PATHS } from '../../const/PATHS'
+import { useNavigate } from 'react-router'
+import { swipeHandler } from '../../lib/swipeHandler'
 
 export const ProjectsSlider = () => {
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
+	const navigate = useNavigate()
 	useEffect(() => {
 		const handleResize = () => {
 			setIsMobile(window.innerWidth < 768)
@@ -23,7 +27,18 @@ export const ProjectsSlider = () => {
 	}, [])
 
 	return isMobile ? (
-		<div className='flex overflow-x-scroll gap-2.5 px-5! w-full snap-x snap-mandatory'>
+		<motion.div
+			dragConstraints={{ top: 0, bottom: 0 }}
+			dragElastic={0.2}
+			drag='y'
+			onDragEnd={swipeHandler(() => navigate(PATHS.menu))}
+			whileDrag={{ scale: 0.98 }}
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: 20 }}
+			transition={{ duration: 0.5 }}
+			className='flex overflow-x-scroll gap-2.5 px-5! w-full snap-x snap-mandatory'
+		>
 			{projects.map(project => (
 				<div
 					key={project.id}
@@ -32,7 +47,7 @@ export const ProjectsSlider = () => {
 					<ProjectCard project={project} />
 				</div>
 			))}
-		</div>
+		</motion.div>
 	) : (
 		<div className='w-full'>
 			<Swiper
