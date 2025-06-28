@@ -25,6 +25,12 @@ const LazyProjects = lazy(() =>
 	}))
 )
 
+const LazyThanks = lazy(() =>
+	import('./components/Thanks/Thanks').then(module => ({
+		default: module.Thanks,
+	}))
+)
+
 function App() {
 	return (
 		<AnimatePresence mode='wait'>
@@ -36,6 +42,7 @@ function App() {
 					<Route path={PATHS.contact} element={<LazyContact />} />
 					<Route path={PATHS.about} element={<LazyAbout />} />
 					<Route path={PATHS.projects} element={<LazyProjects />} />
+					<Route path={PATHS.thanks} element={<LazyThanks />} />
 				</Routes>
 			</HashRouter>
 		</AnimatePresence>
