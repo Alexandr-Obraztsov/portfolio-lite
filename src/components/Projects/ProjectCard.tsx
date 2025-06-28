@@ -31,17 +31,17 @@ export const ProjectCard = ({ project }: Props) => {
 	// Simplified mobile card
 	if (isMobile) {
 		return (
-			<div className='h-full bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden flex flex-col'>
+			<div className='h-full bg-[#d4a14e] rounded-2xl overflow-hidden flex flex-col'>
 				{/* Изображение проекта */}
 				<img
 					src={project.image}
 					alt={project.title}
 					loading='lazy'
-					className='w-full h-40 object-cover object-center'
+					className='w-full h-32 object-cover object-center'
 				/>
 
 				{/* Минимальный контент */}
-				<div className='p-4 flex flex-col'>
+				<div className='p-3 flex flex-col'>
 					<h3 className='text-lg font-bold text-black'>{project.title}</h3>
 
 					{/* Ссылки без текста */}
@@ -52,7 +52,7 @@ export const ProjectCard = ({ project }: Props) => {
 								className='text-black'
 								aria-label='GitHub repository'
 							>
-								<Github size={16} />
+								<Github size={14} />
 							</a>
 						)}
 						{project.live && (
@@ -61,7 +61,7 @@ export const ProjectCard = ({ project }: Props) => {
 								className='text-black'
 								aria-label='Live demo'
 							>
-								<ExternalLink size={16} />
+								<ExternalLink size={14} />
 							</a>
 						)}
 					</div>
